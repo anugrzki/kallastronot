@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AstroCalc Cosmic 12-in-1 Suite</title>
+
     <style>
         :root {
             --bg-color: #030712;
@@ -19,11 +20,16 @@
             --border-glow: rgba(6, 182, 212, 0.3);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
         body {
             background-color: var(--bg-color);
-            background-image: 
+            background-image:
                 radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
                 radial-gradient(2px 2px at 40px 70px, var(--accent-cyan), rgba(0,0,0,0)),
                 radial-gradient(1px 1px at 90px 40px, var(--accent-pink), rgba(0,0,0,0)),
@@ -48,12 +54,20 @@
             box-shadow: 0 0 35px var(--border-glow);
         }
 
-        .header { text-align: center; margin-bottom: 15px; }
-        .header h1 {
-            font-size: 1.5rem; letter-spacing: 2px; color: var(--accent-cyan);
-            text-transform: uppercase; text-shadow: 0 0 10px var(--accent-cyan);
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
         }
 
+        .header h1 {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        /* LOGO */
         .logo-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -86,719 +100,2607 @@
         }
 
         .mode-dropdown {
-            width: 100%; padding: 12px; background: #0b0f19;
-            border: 1px solid var(--accent-pink); border-radius: 10px;
-            color: var(--accent-cyan); font-weight: bold; font-size: 0.95rem;
-            margin-bottom: 20px; cursor: pointer; outline: none;
+            width: 100%;
+            padding: 12px;
+            background: #0b0f19;
+            border: 1px solid var(--accent-pink);
+            border-radius: 10px;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            cursor: pointer;
+            outline: none;
             box-shadow: 0 0 10px rgba(236, 72, 153, 0.2);
         }
 
         .display-box {
-            background: #030712; border: 1px solid var(--border-glow);
-            border-radius: 12px; padding: 15px; margin-bottom: 20px; text-align: right;
+            background: #030712;
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: right;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
         }
 
-        .prev-expr { color: var(--text-muted); font-size: 0.85rem; min-height: 1.2rem; word-wrap: break-word; }
-        .curr-expr { color: var(--accent-cyan); font-size: 1.8rem; font-weight: bold; min-height: 2.2rem; word-wrap: break-word; text-shadow: 0 0 5px var(--accent-cyan); }
-
-        .grid-keypad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        .btn {
-            padding: 14px 5px; border: 1px solid rgba(255, 255, 255, 0.05);
-            background: var(--btn-bg); color: var(--text-main); font-size: 1rem;
-            border-radius: 8px; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 0 rgba(0,0,0,0.5);
+        .prev-expr {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            min-height: 1.2rem;
+            word-wrap: break-word;
         }
-        .btn:hover { background: var(--btn-hover); border-color: var(--accent-cyan); transform: translateY(-2px); }
-        .btn:active { transform: translateY(1px); box-shadow: none; }
-        .btn-op { color: var(--accent-cyan); font-weight: bold; }
-        .btn-act { color: var(--accent-pink); font-weight: bold; }
-        .btn-eq { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); grid-column: span 2; color: white; font-weight: bold; }
 
-        .form-module { display: none; flex-direction: column; gap: 14px; }
-        .form-group { display: flex; flex-direction: column; gap: 6px; }
-        .form-group label { font-size: 0.85rem; color: var(--accent-cyan); }
-        .form-group input, .form-group select, .form-group textarea {
-            padding: 10px; background: #0b0f19; border: 1px solid var(--border-glow);
-            border-radius: 8px; color: white; outline: none; font-size: 0.9rem;
+        .curr-expr {
+            color: var(--accent-cyan);
+            font-size: 1.8rem;
+            font-weight: bold;
+            min-height: 2.2rem;
+            word-wrap: break-word;
+            text-shadow: 0 0 5px var(--accent-cyan);
+        }
+
+        .grid-keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 14px 5px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: var(--btn-bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 3px 0 rgba(0,0,0,0.5);
+        }
+
+        .btn:hover {
+            background: var(--btn-hover);
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: none;
+        }
+
+        .btn-op {
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .btn-act {
+            color: var(--accent-pink);
+            font-weight: bold;
+        }
+
+        .btn-eq {
+            background: linear-gradient(
+                135deg,
+                var(--accent-cyan),
+                var(--accent-purple)
+            );
+            grid-column: span 2;
+            color: white;
+            font-weight: bold;
+        }
+
+        .form-module {
+            display: none;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px;
+            background: #0b0f19;
+            border: 1px solid var(--border-glow);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            font-size: 0.9rem;
         }
 
         .calc-btn-action {
-            padding: 12px; background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-            border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;
-            box-shadow: 0 0 10px rgba(236, 72, 153, 0.3); margin-top: 5px;
+            padding: 12px;
+            background: linear-gradient(
+                135deg,
+                var(--accent-pink),
+                var(--accent-purple)
+            );
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(236,72,153,0.3);
+            margin-top: 5px;
         }
-        .calc-btn-action:hover { opacity: 0.9; }
+
+        .calc-btn-action:hover {
+            opacity: 0.9;
+        }
 
         .result-panel {
-            background: rgba(6, 182, 212, 0.05); border: 1px dashed var(--accent-cyan);
-            padding: 12px; border-radius: 8px; font-size: 0.9rem; color: #f59e0b;
-            margin-top: 5px; word-break: break-all; white-space: pre-line;
+            background: rgba(6,182,212,0.05);
+            border: 1px dashed var(--accent-cyan);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #f59e0b;
+            margin-top: 5px;
+            word-break: break-all;
+            white-space: pre-line;
         }
 
-        .history-panel { max-height: 120px; overflow-y: auto; font-size: 0.8rem; color: var(--text-muted); text-align: left; margin-bottom: 10px; }
-        .history-item { padding: 4px 0; border-bottom: 1px solid #1f2937; cursor: pointer; }
-        .history-item:hover { color: var(--accent-cyan); }
+        .history-panel {
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .history-item {
+            padding: 4px 0;
+            border-bottom: 1px solid #1f2937;
+            cursor: pointer;
+        }
+
+        .history-item:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* COPYRIGHT */
+        .copyright {
+            margin-top: 25px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .copyright-line {
+            width: 80%;
+            height: 1px;
+            margin: 0 auto 12px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--accent-cyan),
+                var(--accent-pink),
+                var(--accent-purple),
+                transparent
+            );
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .copyright strong {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 5px var(--accent-cyan);
+        }
+
+        .copyright-names {
+            color: #ffffff;
+            font-weight: bold;
+            margin-top: 3px;
+        }
+
+        .license {
+            color: var(--accent-pink);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+
+        @media(max-width: 500px) {
+            .astro-card {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 12px 3px;
+                font-size: 0.85rem;
+            }
+
+            .logo-grid {
+                gap: 5px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-    <div class="astro-card">
-        <div class="header">
-            <h1>👨‍🚀 KELOMPOK 2</h1>
+<div class="astro-card">
+
+    <div class="header">
+        <h1>👨‍🚀 KELOMPOK 2</h1>
+    </div>
+
+    <!-- LOGO / FOTO -->
+    <div class="logo-grid">
+        <div class="logo-slot">
+            <img src="mk.jpeg" alt="Logo 1">
         </div>
 
-        <div class="logo-grid">
-            <div class="logo-slot"><img src="assets/logo1.jpeg" alt="Logo 1"></div>
-            <div class="logo-slot"><img src="assets/logo2.jpeg" alt="Logo 2"></div>
-            <div class="logo-slot"><img src="assets/logo3.jpeg" alt="Logo 3"></div>
-            <div class="logo-slot"><img src="assets/logo4.jpeg" alt="Logo 4"></div>
-            <div class="logo-slot"><img src="assets/logo5.jpeg" alt="Logo 5"></div>
+        <div class="logo-slot">
+            <img src="mkk.jpeg" alt="Logo 2">
         </div>
 
-        <select class="mode-dropdown" id="main-mode" onchange="switchModule()">
-            <option value="basic">1. Kalkulator Dasar</option>
-            <option value="scientific">2. Scientific Calculator</option>
-            <option value="math">3. Kalkulator Matematika (FPB, Matrix, Dll)</option>
-            <option value="finance">4. Kalkulator Keuangan (Bunga, KPR, Dll)</option>
-            <option value="unit">5. Unit Converter</option>
-            <option value="programmer">6. Kalkulator Programmer (RPL)</option>
-            <option value="science">7. Kalkulator Sains (Fisika/Listrik)</option>
-            <option value="geometry">8. Kalkulator Geometri</option>
-            <option value="datetime">9. Date & Time Calculator</option>
-            <option value="lifestyle">10. Kehidupan Sehari-hari (BBM, Cat, Dll)</option>
-            <option value="stats">11. Statistik & Data</option>
-            <option value="ai">12. Fitur AI Math Solver</option>
-        </select>
-
-        <div class="display-box" id="display-area">
-            <div class="history-panel" id="history-list"></div>
-            <div class="prev-expr" id="prev-expr"></div>
-            <div class="curr-expr" id="curr-expr">0</div>
+        <div class="logo-slot">
+            <img src="mkkkkk.jpeg" alt="Logo 3">
         </div>
 
-        <div class="grid-keypad" id="grid-keypad"></div>
-
-        <div class="form-module" id="module-math">
-            <div class="form-group">
-                <label>Pilih Sub-Fitur Matematika:</label>
-                <select id="math-type" onchange="renderMathForm()">
-                    <option value="fpb_kpk">FPB & KPK</option>
-                    <option value="prime">Cek Bilangan Prima</option>
-                    <option value="quadratic">Persamaan Kuadrat (ax² + bx + c = 0)</option>
-                    <option value="matrix">Determinan Matriks (2x2)</option>
-                </select>
-            </div>
-            <div id="math-inputs"></div>
-            <button class="calc-btn-action" onclick="processMath()">Hitung Matematika</button>
-            <div class="result-panel" id="math-result">Hasil akan muncul di sini.</div>
+        <div class="logo-slot">
+            <img src="mkkkk.jpeg" alt="Logo 4">
         </div>
 
-        <div class="form-module" id="module-finance">
-            <div class="form-group">
-                <label>Pilih Fitur Keuangan:</label>
-                <select id="fin-type" onchange="renderFinanceForm()">
-                    <option value="simple_interest">Bunga Sederhana</option>
-                    <option value="compound_interest">Bunga Majemuk / Tabungan</option>
-                    <option value="mortgage">Cicilan / KPR</option>
-                    <option value="roi">ROI (Return on Investment)</option>
-                    <option value="bep">Break-Even Point (BEP)</option>
-                </select>
-            </div>
-            <div id="fin-inputs"></div>
-            <button class="calc-btn-action" onclick="processFinance()">Hitung Keuangan</button>
-            <div class="result-panel" id="fin-result">Hasil akan muncul di sini.</div>
+        <div class="logo-slot">
+            <img src="mkkk.jpeg" alt="Logo 5">
+        </div>
+    </div>
+
+    <!-- PILIH MODE -->
+    <select class="mode-dropdown" id="main-mode" onchange="switchModule()">
+        <option value="basic">1. Kalkulator Dasar</option>
+        <option value="scientific">2. Scientific Calculator</option>
+        <option value="math">3. Kalkulator Matematika (FPB, Matrix, Dll)</option>
+        <option value="finance">4. Kalkulator Keuangan (Bunga, KPR, Dll)</option>
+        <option value="unit">5. Unit Converter</option>
+        <option value="programmer">6. Kalkulator Programmer (RPL)</option>
+        <option value="science">7. Kalkulator Sains (Fisika/Listrik)</option>
+        <option value="geometry">8. Kalkulator Geometri</option>
+        <option value="datetime">9. Date & Time Calculator</option>
+        <option value="lifestyle">10. Kehidupan Sehari-hari (BBM, Cat, Dll)</option>
+        <option value="stats">11. Statistik & Data</option>
+        <option value="ai">12. Fitur AI Math Solver</option>
+    </select>
+
+    <!-- DISPLAY -->
+    <div class="display-box" id="display-area">
+        <div class="history-panel" id="history-list"></div>
+        <div class="prev-expr" id="prev-expr"></div>
+        <div class="curr-expr" id="curr-expr">0</div>
+    </div>
+
+    <div class="grid-keypad" id="grid-keypad"></div>
+
+    <!-- MATEMATIKA -->
+    <div class="form-module" id="module-math">
+
+        <div class="form-group">
+            <label>Pilih Sub-Fitur Matematika:</label>
+
+            <select id="math-type" onchange="renderMathForm()">
+                <option value="fpb_kpk">FPB & KPK</option>
+                <option value="prime">Cek Bilangan Prima</option>
+                <option value="quadratic">
+                    Persamaan Kuadrat (ax² + bx + c = 0)
+                </option>
+                <option value="matrix">
+                    Determinan Matriks (2x2)
+                </option>
+            </select>
         </div>
 
-        <div class="form-module" id="module-unit">
-            <div class="form-group">
-                <label>Kategori Unit:</label>
-                <select id="unit-cat" onchange="updateUnitDropdowns()">
-                    <option value="length">Panjang (m, km, inch, mile, dll)</option>
-                    <option value="weight">Berat (g, kg, oz, lb, dll)</option>
-                    <option value="temp">Suhu (°C, °F, K)</option>
-                    <option value="time">Waktu (detik, menit, jam, hari)</option>
-                    <option value="data">Data (Bit, Byte, KB, MB, GB, TB)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Nilai Input:</label>
-                <input type="number" id="unit-val" value="1" oninput="processUnit()">
-            </div>
-            <div class="form-group"><label>Dari:</label><select id="unit-from" onchange="processUnit()"></select></div>
-            <div class="form-group"><label>Ke:</label><select id="unit-to" onchange="processUnit()"></select></div>
-            <div class="result-panel" id="unit-result">Hasil Konversi: -</div>
-        </div>
+        <div id="math-inputs"></div>
 
-        <div class="form-module" id="module-programmer">
-            <div class="form-group">
-                <label>Input Angka Desimal (Base 10):</label>
-                <input type="number" id="prog-num" placeholder="255" oninput="processProgrammer()">
-            </div>
-            <div class="result-panel" id="prog-result">BIN: -<br>OCT: -<br>HEX: -</div>
-            <hr style="border-color: var(--border-glow); margin: 5px 0;">
-            <div class="form-group">
-                <label>Konversi Teks ↔ ASCII:</label>
-                <input type="text" id="prog-text" placeholder="Aplikasi RPL" oninput="processASCII()">
-            </div>
-            <div class="result-panel" id="ascii-result">ASCII Code: -</div>
-        </div>
+        <button class="calc-btn-action" onclick="processMath()">
+            Hitung Matematika
+        </button>
 
-        <div class="form-module" id="module-science">
-            <div class="form-group">
-                <label>Rumus Sains / Fisika:</label>
-                <select id="sci-type" onchange="renderScienceForm()">
-                    <option value="speed">Kecepatan (v = s / t)</option>
-                    <option value="force">Gaya (F = m · a)</option>
-                    <option value="ohms_law">Hukum Ohm (V = I · R)</option>
-                    <option value="density">Massa Jenis (ρ = m / V)</option>
-                </select>
-            </div>
-            <div id="sci-inputs"></div>
-            <button class="calc-btn-action" onclick="processScience()">Hitung Sains</button>
-            <div class="result-panel" id="sci-result">Hasil akan muncul di sini.</div>
-        </div>
-
-        <div class="form-module" id="module-geometry">
-            <div class="form-group">
-                <label>Bentuk Geometri:</label>
-                <select id="geo-type" onchange="renderGeoForm()">
-                    <option value="rectangle">Persegi Panjang</option>
-                    <option value="circle">Lingkaran</option>
-                    <option value="cylinder">Tabung</option>
-                    <option value="sphere">Bola</option>
-                </select>
-            </div>
-            <div id="geo-inputs"></div>
-            <button class="calc-btn-action" onclick="processGeometry()">Hitung Geometri</button>
-            <div class="result-panel" id="geo-result">Hasil akan muncul di sini.</div>
-        </div>
-
-        <div class="form-module" id="module-datetime">
-            <div class="form-group">
-                <label>Tanggal Awal / Tanggal Lahir:</label>
-                <input type="date" id="dt-start">
-            </div>
-            <div class="form-group">
-                <label>Tanggal Akhir:</label>
-                <input type="date" id="dt-end">
-            </div>
-            <button class="calc-btn-action" onclick="processDateTime()">Hitung Selisih & Umur</button>
-            <div class="result-panel" id="dt-result">Hasil akan muncul di sini.</div>
-        </div>
-
-        <div class="form-module" id="module-lifestyle">
-            <div class="form-group">
-                <label>Pilih Kalkulator Kebutuhan:</label>
-                <select id="life-type" onchange="renderLifeForm()">
-                    <option value="tip">Split Bill & Tip</option>
-                    <option value="fuel">Konsumsi BBM & Biaya</option>
-                    <option value="paint">Kebutuhan Paint / Cat Dinding</option>
-                </select>
-            </div>
-            <div id="life-inputs"></div>
-            <button class="calc-btn-action" onclick="processLifestyle()">Hitung Kebutuhan</button>
-            <div class="result-panel" id="life-result">Hasil akan muncul di sini.</div>
-        </div>
-
-        <div class="form-module" id="module-stats">
-            <div class="form-group">
-                <label>Masukkan Data (Pisahkan dengan koma):</label>
-                <textarea id="stats-data" rows="3" placeholder="10, 20, 15, 20, 25, 30, 40"></textarea>
-            </div>
-            <button class="calc-btn-action" onclick="processStats()">Analisis Statistik</button>
-            <div class="result-panel" id="stats-result">Hasil akan muncul di sini.</div>
-        </div>
-
-        <div class="form-module" id="module-ai">
-            <div class="form-group">
-                <label>🤖 Ask Astro AI Solver (Natural Language):</label>
-                <textarea id="ai-prompt" rows="3" placeholder="Contoh: Hitung luas lingkaran dengan diameter 20 cm"></textarea>
-            </div>
-            <button class="calc-btn-action" onclick="processAISolver()">Selesaikan dengan AI</button>
-            <div class="result-panel" id="ai-result">AI Engine Siap Menjawab...</div>
+        <div class="result-panel" id="math-result">
+            Hasil akan muncul di sini.
         </div>
 
     </div>
 
-    <script>
-        let expr = "";
-        let calcHistory = [];
-        let angleMode = "DEG";
+    <!-- KEUANGAN -->
+    <div class="form-module" id="module-finance">
 
-        function switchModule() {
-            const mode = document.getElementById('main-mode').value;
-            const displayArea = document.getElementById('display-area');
-            const keypad = document.getElementById('grid-keypad');
-            
-            displayArea.style.display = 'none';
-            keypad.style.display = 'none';
-            document.querySelectorAll('.form-module').forEach(m => m.style.display = 'none');
+        <div class="form-group">
+            <label>Pilih Fitur Keuangan:</label>
 
-            if (mode === 'basic' || mode === 'scientific') {
-                displayArea.style.display = 'block';
-                keypad.style.display = 'grid';
-                renderKeypad(mode);
-            } else {
-                document.getElementById(`module-${mode}`).style.display = 'flex';
-                if(mode === 'math') renderMathForm();
-                if(mode === 'finance') renderFinanceForm();
-                if(mode === 'unit') updateUnitDropdowns();
-                if(mode === 'science') renderScienceForm();
-                if(mode === 'geometry') renderGeoForm();
-                if(mode === 'lifestyle') renderLifeForm();
-            }
+            <select id="fin-type" onchange="renderFinanceForm()">
+                <option value="simple_interest">
+                    Bunga Sederhana
+                </option>
+
+                <option value="compound_interest">
+                    Bunga Majemuk / Tabungan
+                </option>
+
+                <option value="mortgage">
+                    Cicilan / KPR
+                </option>
+
+                <option value="roi">
+                    ROI (Return on Investment)
+                </option>
+
+                <option value="bep">
+                    Break-Even Point (BEP)
+                </option>
+            </select>
+        </div>
+
+        <div id="fin-inputs"></div>
+
+        <button class="calc-btn-action" onclick="processFinance()">
+            Hitung Keuangan
+        </button>
+
+        <div class="result-panel" id="fin-result">
+            Hasil akan muncul di sini.
+        </div>
+
+    </div>
+
+    <!-- UNIT CONVERTER -->
+    <div class="form-module" id="module-unit">
+
+        <div class="form-group">
+            <label>Kategori Unit:</label>
+
+            <select id="unit-cat" onchange="updateUnitDropdowns()">
+                <option value="length">
+                    Panjang
+                </option>
+
+                <option value="weight">
+                    Berat
+                </option>
+
+                <option value="temp">
+                    Suhu
+                </option>
+
+                <option value="time">
+                    Waktu
+                </option>
+
+                <option value="data">
+                    Data
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Nilai Input:</label>
+            <input
+                type="number"
+                id="unit-val"
+                value="1"
+                oninput="processUnit()"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Dari:</label>
+            <select id="unit-from" onchange="processUnit()"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Ke:</label>
+            <select id="unit-to" onchange="processUnit()"></select>
+        </div>
+
+        <div class="result-panel" id="unit-result">
+            Hasil Konversi: -
+        </div>
+
+    </div>
+
+    <!-- PROGRAMMER -->
+    <div class="form-module" id="module-programmer">
+
+        <div class="form-group">
+            <label>Input Angka Desimal (Base 10):</label>
+
+            <input
+                type="number"
+                id="prog-num"
+                placeholder="255"
+                oninput="processProgrammer()"
+            >
+        </div>
+
+        <div class="result-panel" id="prog-result">
+            BIN: -<br>
+            OCT: -<br>
+            HEX: -
+        </div>
+
+        <hr style="border-color: var(--border-glow); margin:5px 0;">
+
+        <div class="form-group">
+            <label>Konversi Teks ↔ ASCII:</label>
+
+            <input
+                type="text"
+                id="prog-text"
+                placeholder="Aplikasi RPL"
+                oninput="processASCII()"
+            >
+        </div>
+
+        <div class="result-panel" id="ascii-result">
+            ASCII Code: -
+        </div>
+
+    </div>
+
+    <!-- SAINS -->
+    <div class="form-module" id="module-science">
+
+        <div class="form-group">
+            <label>Rumus Sains / Fisika:</label>
+
+            <select id="sci-type" onchange="renderScienceForm()">
+                <option value="speed">
+                    Kecepatan (v = s / t)
+                </option>
+
+                <option value="force">
+                    Gaya (F = m · a)
+                </option>
+
+                <option value="ohms_law">
+                    Hukum Ohm (V = I · R)
+                </option>
+
+                <option value="density">
+                    Massa Jenis (ρ = m / V)
+                </option>
+            </select>
+        </div>
+
+        <div id="sci-inputs"></div>
+
+        <button class="calc-btn-action" onclick="processScience()">
+            Hitung Sains
+        </button>
+
+        <div class="result-panel" id="sci-result">
+            Hasil akan muncul di sini.
+        </div>
+
+    </div>
+
+    <!-- GEOMETRI -->
+    <div class="form-module" id="module-geometry">
+
+        <div class="form-group">
+            <label>Bentuk Geometri:</label>
+
+            <select id="geo-type" onchange="renderGeoForm()">
+                <option value="rectangle">
+                    Persegi Panjang
+                </option>
+
+                <option value="circle">
+                    Lingkaran
+                </option>
+
+                <option value="cylinder">
+                    Tabung
+                </option>
+
+                <option value="sphere">
+                    Bola
+                </option>
+            </select>
+        </div>
+
+        <div id="geo-inputs"></div>
+
+        <button class="calc-btn-action" onclick="processGeometry()">
+            Hitung Geometri
+        </button>
+
+        <div class="result-panel" id="geo-result">
+            Hasil akan muncul di sini.
+        </div>
+
+    </div>
+
+    <!-- DATE TIME -->
+    <div class="form-module" id="module-datetime">
+
+        <div class="form-group">
+            <label>Tanggal Awal / Tanggal Lahir:</label>
+
+            <input type="date" id="dt-start">
+        </div>
+
+        <div class="form-group">
+            <label>Tanggal Akhir:</label>
+
+            <input type="date" id="dt-end">
+        </div>
+
+        <button class="calc-btn-action" onclick="processDateTime()">
+            Hitung Selisih & Umur
+        </button>
+
+        <div class="result-panel" id="dt-result">
+            Hasil akan muncul di sini.
+        </div>
+
+    </div>
+
+    <!-- LIFESTYLE -->
+    <div class="form-module" id="module-lifestyle">
+
+        <div class="form-group">
+            <label>Pilih Kalkulator Kebutuhan:</label>
+
+            <select id="life-type" onchange="renderLifeForm()">
+
+                <option value="tip">
+                    Split Bill & Tip
+                </option>
+
+                <option value="fuel">
+                    Konsumsi BBM & Biaya
+                </option>
+
+                <option value="paint">
+                    Kebutuhan Paint / Cat Dinding
+                </option>
+
+            </select>
+        </div>
+
+        <div id="life-inputs"></div>
+
+        <button class="calc-btn-action" onclick="processLifestyle()">
+            Hitung Kebutuhan
+        </button>
+
+        <div class="result-panel" id="life-result">
+            Hasil akan muncul di sini.
+        </div>
+
+    </div>
+
+    <!-- STATISTIK -->
+    <div class="form-module" id="module-stats">
+
+        <div class="form-group">
+
+            <label>
+                Masukkan Data (Pisahkan dengan koma):
+            </label>
+
+            <textarea
+                id="stats-data"
+                rows="3"
+                placeholder="10, 20, 15, 20, 25, 30, 40"
+            ></textarea>
+
+        </div>
+
+        <button class="calc-btn-action" onclick="processStats()">
+            Analisis Statistik
+        </button>
+
+        <div class="result-panel" id="stats-result">
+            Hasil akan muncul di sini.
+        </div>
+
+    </div>
+
+    <!-- AI -->
+    <div class="form-module" id="module-ai">
+
+        <div class="form-group">
+
+            <label>
+                🤖 Ask Astro AI Solver (Natural Language):
+            </label>
+
+            <textarea
+                id="ai-prompt"
+                rows="3"
+                placeholder="Contoh: Hitung luas lingkaran dengan diameter 20 cm"
+            ></textarea>
+
+        </div>
+
+        <button class="calc-btn-action" onclick="processAISolver()">
+            Selesaikan dengan AI
+        </button>
+
+        <div class="result-panel" id="ai-result">
+            AI Engine Siap Menjawab...
+        </div>
+
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="copyright">
+
+        <div class="copyright-line"></div>
+
+        <p>
+            © 2026
+            <strong>AstroCalc Cosmic 12-in-1 Suite</strong>
+        </p>
+
+        <p>Copyright by:</p>
+
+        <p class="copyright-names">
+            Anugrah Rezki • Harya Tri A • Maulana Arkand • Wanda Surya
+        </p>
+
+        <p class="license">
+            ALL RIGHTS RESERVED
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let expr = "";
+let calcHistory = [];
+let angleMode = "DEG";
+
+
+/* =========================
+   SWITCH MODULE
+========================= */
+
+function switchModule() {
+
+    const mode =
+        document.getElementById('main-mode').value;
+
+    const displayArea =
+        document.getElementById('display-area');
+
+    const keypad =
+        document.getElementById('grid-keypad');
+
+    displayArea.style.display = 'none';
+
+    keypad.style.display = 'none';
+
+    document
+        .querySelectorAll('.form-module')
+        .forEach(m => m.style.display = 'none');
+
+
+    if(mode === 'basic' || mode === 'scientific') {
+
+        displayArea.style.display = 'block';
+
+        keypad.style.display = 'grid';
+
+        renderKeypad(mode);
+
+    } else {
+
+        document
+            .getElementById(`module-${mode}`)
+            .style.display = 'flex';
+
+        if(mode === 'math')
+            renderMathForm();
+
+        if(mode === 'finance')
+            renderFinanceForm();
+
+        if(mode === 'unit')
+            updateUnitDropdowns();
+
+        if(mode === 'science')
+            renderScienceForm();
+
+        if(mode === 'geometry')
+            renderGeoForm();
+
+        if(mode === 'lifestyle')
+            renderLifeForm();
+
+    }
+
+}
+
+
+/* =========================
+   KEYPAD
+========================= */
+
+function renderKeypad(mode) {
+
+    const keypad =
+        document.getElementById('grid-keypad');
+
+    keypad.innerHTML = '';
+
+
+    const basicBtns = [
+
+        {
+            t:'AC',
+            c:'btn-act',
+            f:'clearAll()'
+        },
+
+        {
+            t:'DEL',
+            c:'btn-act',
+            f:'delChar()'
+        },
+
+        {
+            t:'%',
+            c:'btn-op',
+            f:"append('%')"
+        },
+
+        {
+            t:'÷',
+            c:'btn-op',
+            f:"append('/')"
+        },
+
+        {
+            t:'7',
+            f:"append('7')"
+        },
+
+        {
+            t:'8',
+            f:"append('8')"
+        },
+
+        {
+            t:'9',
+            f:"append('9')"
+        },
+
+        {
+            t:'×',
+            c:'btn-op',
+            f:"append('*')"
+        },
+
+        {
+            t:'4',
+            f:"append('4')"
+        },
+
+        {
+            t:'5',
+            f:"append('5')"
+        },
+
+        {
+            t:'6',
+            f:"append('6')"
+        },
+
+        {
+            t:'-',
+            c:'btn-op',
+            f:"append('-')"
+        },
+
+        {
+            t:'1',
+            f:"append('1')"
+        },
+
+        {
+            t:'2',
+            f:"append('2')"
+        },
+
+        {
+            t:'3',
+            f:"append('3')"
+        },
+
+        {
+            t:'+',
+            c:'btn-op',
+            f:"append('+')"
+        },
+
+        {
+            t:'±',
+            f:"toggleSign()"
+        },
+
+        {
+            t:'0',
+            f:"append('0')"
+        },
+
+        {
+            t:'.',
+            f:"append('.')"
+        },
+
+        {
+            t:'=',
+            c:'btn-eq',
+            f:'calculate()'
         }
 
-        function renderKeypad(mode) {
-            const keypad = document.getElementById('grid-keypad');
-            keypad.innerHTML = '';
+    ];
 
-            const basicBtns = [
-                { t: 'AC', c: 'btn-act', f: 'clearAll()' }, { t: 'DEL', c: 'btn-act', f: 'delChar()' },
-                { t: '%', c: 'btn-op', f: "append('%')" }, { t: '÷', c: 'btn-op', f: "append('/')" },
-                { t: '7', f: "append('7')" }, { t: '8', f: "append('8')" }, { t: '9', f: "append('9')" }, { t: '×', c: 'btn-op', f: "append('*')" },
-                { t: '4', f: "append('4')" }, { t: '5', f: "append('5')" }, { t: '6', f: "append('6')" }, { t: '-', c: 'btn-op', f: "append('-')" },
-                { t: '1', f: "append('1')" }, { t: '2', f: "append('2')" }, { t: '3', f: "append('3')" }, { t: '+', c: 'btn-op', f: "append('+')" },
-                { t: '±', f: "toggleSign()" }, { t: '0', f: "append('0')" }, { t: '.', f: "append('.')" }, { t: '=', c: 'btn-eq', f: 'calculate()' }
-            ];
 
-            const sciBtns = [
-                { t: angleMode, c: 'btn-act', f: 'toggleAngleMode()' },
-                { t: 'sin', c: 'btn-op', f: "appendMath('sin')" },
-                { t: 'cos', c: 'btn-op', f: "appendMath('cos')" },
-                { t: 'tan', c: 'btn-op', f: "appendMath('tan')" },
+    const sciBtns = [
 
-                { t: 'ln', c: 'btn-op', f: "appendMath('log')" },
-                { t: 'log', c: 'btn-op', f: "appendMath('log10')" },
-                { t: 'e', c: 'btn-op', f: "append('Math.E')" },
-                { t: 'π', c: 'btn-op', f: "append('Math.PI')" },
+        {
+            t:angleMode,
+            c:'btn-act',
+            f:'toggleAngleMode()'
+        },
 
-                { t: '(', c: 'btn-op', f: "append('(')" },
-                { t: ')', c: 'btn-op', f: "append(')')" },
-                { t: 'x²', c: 'btn-op', f: "append('**2')" },
-                { t: 'xⁿ', c: 'btn-op', f: "append('**')" },
+        {
+            t:'sin',
+            c:'btn-op',
+            f:"appendMath('sin')"
+        },
 
-                { t: '√', c: 'btn-op', f: "appendMath('sqrt')" },
-                { t: 'n!', c: 'btn-op', f: "calcFactorialDirect()" },
-                { t: 'AC', c: 'btn-act', f: 'clearAll()' },
-                { t: 'DEL', c: 'btn-act', f: 'delChar()' },
+        {
+            t:'cos',
+            c:'btn-op',
+            f:"appendMath('cos')"
+        },
 
-                { t: '7', f: "append('7')" }, { t: '8', f: "append('8')" }, { t: '9', f: "append('9')" }, { t: '÷', c: 'btn-op', f: "append('/')" },
-                { t: '4', f: "append('4')" }, { t: '5', f: "append('5')" }, { t: '6', f: "append('6')" }, { t: '×', c: 'btn-op', f: "append('*')" },
-                { t: '1', f: "append('1')" }, { t: '2', f: "append('2')" }, { t: '3', f: "append('3')" }, { t: '-', c: 'btn-op', f: "append('-')" },
-                { t: '0', f: "append('0')" }, { t: '.', f: "append('.')" }, { t: '%', c: 'btn-op', f: "append('%')" }, { t: '+', c: 'btn-op', f: "append('+')" },
-                { t: '±', f: "toggleSign()" }, { t: '=', c: 'btn-eq', f: 'calculate()' }
-            ];
+        {
+            t:'tan',
+            c:'btn-op',
+            f:"appendMath('tan')"
+        },
 
-            const list = (mode === 'scientific') ? sciBtns : basicBtns;
-            list.forEach(b => {
-                const button = document.createElement('button');
-                button.className = `btn ${b.c || ''}`;
-                button.innerText = b.t;
-                button.setAttribute('onclick', b.f);
-                keypad.appendChild(button);
-            });
+        {
+            t:'ln',
+            c:'btn-op',
+            f:"appendMath('log')"
+        },
+
+        {
+            t:'log',
+            c:'btn-op',
+            f:"appendMath('log10')"
+        },
+
+        {
+            t:'√',
+            c:'btn-op',
+            f:"appendMath('sqrt')"
+        },
+
+        {
+            t:'x²',
+            c:'btn-op',
+            f:"append('**2')"
+        },
+
+        {
+            t:'xⁿ',
+            c:'btn-op',
+            f:"append('**')"
+        },
+
+        {
+            t:'π',
+            c:'btn-op',
+            f:"append('Math.PI')"
+        },
+
+        {
+            t:'e',
+            c:'btn-op',
+            f:"append('Math.E')"
+        },
+
+        {
+            t:'(',
+            c:'btn-op',
+            f:"append('(')"
+        },
+
+        {
+            t:')',
+            c:'btn-op',
+            f:"append(')')"
+        },
+
+        {
+            t:'n!',
+            c:'btn-op',
+            f:'calcFactorialDirect()'
+        },
+
+        ...basicBtns
+
+    ];
+
+
+    const list =
+        mode === 'scientific'
+        ? sciBtns
+        : basicBtns;
+
+
+    list.forEach(b => {
+
+        const button =
+            document.createElement('button');
+
+        button.className =
+            `btn ${b.c || ''}`;
+
+        button.innerText = b.t;
+
+        button.setAttribute(
+            'onclick',
+            b.f
+        );
+
+        keypad.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================
+   BASIC CALCULATOR
+========================= */
+
+function append(val) {
+
+    expr += val;
+
+    updateDisplay();
+
+}
+
+
+function appendMath(fn) {
+
+    expr += `Math.${fn}(`;
+
+    updateDisplay();
+
+}
+
+
+function clearAll() {
+
+    expr = '';
+
+    document
+        .getElementById('prev-expr')
+        .innerText = '';
+
+    updateDisplay();
+
+}
+
+
+function delChar() {
+
+    expr =
+        expr.slice(0,-1);
+
+    updateDisplay();
+
+}
+
+
+function toggleSign() {
+
+    expr =
+        expr.startsWith('-')
+        ? expr.slice(1)
+        : '-' + expr;
+
+    updateDisplay();
+
+}
+
+
+function toggleAngleMode() {
+
+    angleMode =
+        angleMode === "DEG"
+        ? "RAD"
+        : angleMode === "RAD"
+        ? "GRAD"
+        : "DEG";
+
+    renderKeypad('scientific');
+
+}
+
+
+function updateDisplay() {
+
+    document
+        .getElementById('curr-expr')
+        .innerText =
+        expr || '0';
+
+}
+
+
+function calculate() {
+
+    try {
+
+        let parsedExpr =
+            expr
+            .replace(/÷/g,'/')
+            .replace(/×/g,'*');
+
+        let result =
+            eval(parsedExpr);
+
+        document
+            .getElementById('prev-expr')
+            .innerText =
+            expr + ' =';
+
+        document
+            .getElementById('curr-expr')
+            .innerText =
+            result;
+
+        calcHistory.unshift(
+            `${expr} = ${result}`
+        );
+
+        if(calcHistory.length > 5)
+            calcHistory.pop();
+
+        renderHistory();
+
+        expr =
+            result.toString();
+
+    }
+
+    catch(e) {
+
+        document
+            .getElementById('curr-expr')
+            .innerText =
+            'Error';
+
+        expr = '';
+
+    }
+
+}
+
+
+function renderHistory() {
+
+    const hPanel =
+        document.getElementById('history-list');
+
+    hPanel.innerHTML =
+        calcHistory
+        .map(h =>
+            `<div class="history-item"
+            onclick="useHistory('${h}')">
+            ${h}
+            </div>`
+        )
+        .join('');
+
+}
+
+
+function useHistory(item) {
+
+    expr =
+        item.split(' = ')[1];
+
+    updateDisplay();
+
+}
+
+
+function calcFactorialDirect() {
+
+    let n =
+        parseInt(expr);
+
+    if(isNaN(n) || n < 0)
+        return;
+
+    let f = 1;
+
+    for(let i=1;i<=n;i++)
+        f *= i;
+
+    expr =
+        f.toString();
+
+    updateDisplay();
+
+}
+
+
+/* =========================
+   MATEMATIKA
+========================= */
+
+function renderMathForm() {
+
+    const type =
+        document.getElementById('math-type').value;
+
+    const target =
+        document.getElementById('math-inputs');
+
+
+    if(type === 'fpb_kpk') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Angka A:</label>
+                <input type="number" id="m-a" value="12">
+            </div>
+
+            <div class="form-group">
+                <label>Angka B:</label>
+                <input type="number" id="m-b" value="18">
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'prime') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Masukkan Angka:</label>
+                <input type="number" id="m-prime" value="29">
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'quadratic') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Nilai a:</label>
+                <input type="number" id="m-qa" value="1">
+            </div>
+
+            <div class="form-group">
+                <label>Nilai b:</label>
+                <input type="number" id="m-qb" value="-3">
+            </div>
+
+            <div class="form-group">
+                <label>Nilai c:</label>
+                <input type="number" id="m-qc" value="2">
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'matrix') {
+
+        target.innerHTML = `
+            <div class="form-group">
+
+                <label>
+                    Matriks 2x2 [a,b;c,d]:
+                </label>
+
+                <input
+                    type="number"
+                    id="m-a1"
+                    placeholder="a"
+                    value="1"
+                >
+
+                <input
+                    type="number"
+                    id="m-b1"
+                    placeholder="b"
+                    value="2"
+                >
+
+                <input
+                    type="number"
+                    id="m-c1"
+                    placeholder="c"
+                    value="3"
+                >
+
+                <input
+                    type="number"
+                    id="m-d1"
+                    placeholder="d"
+                    value="4"
+                >
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+function processMath() {
+
+    const type =
+        document.getElementById('math-type').value;
+
+    const res =
+        document.getElementById('math-result');
+
+
+    if(type === 'fpb_kpk') {
+
+        let a =
+            parseInt(
+                document.getElementById('m-a').value
+            );
+
+        let b =
+            parseInt(
+                document.getElementById('m-b').value
+            );
+
+        let gcd =
+            (x,y) =>
+            y === 0
+            ? x
+            : gcd(y,x % y);
+
+        let fpb =
+            gcd(a,b);
+
+        let kpk =
+            (a*b)/fpb;
+
+        res.innerText =
+            `FPB: ${fpb}\nKPK: ${kpk}`;
+
+    }
+
+
+    else if(type === 'prime') {
+
+        let n =
+            parseInt(
+                document.getElementById('m-prime').value
+            );
+
+        let isPrime =
+            n > 1;
+
+        for(
+            let i=2;
+            i<=Math.sqrt(n);
+            i++
+        )
+            if(n%i===0)
+                isPrime=false;
+
+        res.innerText =
+            `${n} Adalah Bilangan Prima? ${
+                isPrime
+                ? 'YA ✅'
+                : 'BUKAN ❌'
+            }`;
+
+    }
+
+
+    else if(type === 'quadratic') {
+
+        let a =
+            parseFloat(
+                document.getElementById('m-qa').value
+            );
+
+        let b =
+            parseFloat(
+                document.getElementById('m-qb').value
+            );
+
+        let c =
+            parseFloat(
+                document.getElementById('m-qc').value
+            );
+
+        let d =
+            b*b - 4*a*c;
+
+        if(d < 0) {
+
+            res.innerText =
+                "Akar-akar Imajiner (D < 0)";
+
         }
 
-        function append(val) { expr += val; updateDisplay(); }
-        function appendMath(fn) { expr += `Math.${fn}(`; updateDisplay(); }
-        function clearAll() { expr = ''; document.getElementById('prev-expr').innerText = ''; updateDisplay(); }
-        function delChar() { expr = expr.slice(0, -1); updateDisplay(); }
-        function toggleSign() { expr = expr.startsWith('-') ? expr.slice(1) : '-' + expr; updateDisplay(); }
-        function toggleAngleMode() {
-            angleMode = angleMode === "DEG" ? "RAD" : (angleMode === "RAD" ? "GRAD" : "DEG");
-            renderKeypad('scientific');
-        }
-        function updateDisplay() { document.getElementById('curr-expr').innerText = expr || '0'; }
+        else {
 
-        function calculate() {
-            try {
-                let parsedExpr = expr.replace(/÷/g, '/').replace(/×/g, '*');
-                let result = eval(parsedExpr);
-                document.getElementById('prev-expr').innerText = expr + ' =';
-                document.getElementById('curr-expr').innerText = result;
-                
-                calcHistory.unshift(`${expr} = ${result}`);
-                if(calcHistory.length > 5) calcHistory.pop();
-                renderHistory();
-                
-                expr = result.toString();
-            } catch (e) {
-                document.getElementById('curr-expr').innerText = 'Error';
-                expr = '';
-            }
+            let x1 =
+                (-b + Math.sqrt(d))/(2*a);
+
+            let x2 =
+                (-b - Math.sqrt(d))/(2*a);
+
+            res.innerText =
+                `x₁ = ${x1.toFixed(2)}
+x₂ = ${x2.toFixed(2)}`;
+
         }
 
-        function renderHistory() {
-            const hPanel = document.getElementById('history-list');
-            hPanel.innerHTML = calcHistory.map(h => `<div class="history-item" onclick="useHistory('${h}')">${h}</div>`).join('');
+    }
+
+
+    else if(type === 'matrix') {
+
+        let a =
+            parseFloat(
+                document.getElementById('m-a1').value
+            );
+
+        let b =
+            parseFloat(
+                document.getElementById('m-b1').value
+            );
+
+        let c =
+            parseFloat(
+                document.getElementById('m-c1').value
+            );
+
+        let d =
+            parseFloat(
+                document.getElementById('m-d1').value
+            );
+
+        let det =
+            (a*d)-(b*c);
+
+        res.innerText =
+            `Determinan Matriks = ${det}`;
+
+    }
+
+}
+
+
+/* =========================
+   FINANCE
+========================= */
+
+function renderFinanceForm() {
+
+    const type =
+        document.getElementById('fin-type').value;
+
+    const target =
+        document.getElementById('fin-inputs');
+
+
+    if(
+        type === 'simple_interest' ||
+        type === 'compound_interest'
+    ) {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>
+                    Modal / Pinjaman Awal (Rp):
+                </label>
+
+                <input
+                    type="number"
+                    id="f-pv"
+                    value="10000000"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Bunga per Tahun (%):
+                </label>
+
+                <input
+                    type="number"
+                    id="f-rate"
+                    value="10"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Waktu (Tahun):</label>
+
+                <input
+                    type="number"
+                    id="f-time"
+                    value="2"
+                >
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'mortgage') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>
+                    Plafond Pinjaman KPR (Rp):
+                </label>
+
+                <input
+                    type="number"
+                    id="f-kpr-p"
+                    value="300000000"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Bunga Tahunan (%):</label>
+
+                <input
+                    type="number"
+                    id="f-kpr-r"
+                    value="8"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Tenor (Tahun):</label>
+
+                <input
+                    type="number"
+                    id="f-kpr-t"
+                    value="15"
+                >
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'roi') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>
+                    Investasi Awal (Rp):
+                </label>
+
+                <input
+                    type="number"
+                    id="f-roi-i"
+                    value="50000000"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Total Keuntungan / Hasil (Rp):
+                </label>
+
+                <input
+                    type="number"
+                    id="f-roi-g"
+                    value="65000000"
+                >
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'bep') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>
+                    Biaya Tetap / Fixed Cost (Rp):
+                </label>
+
+                <input
+                    type="number"
+                    id="f-bep-fc"
+                    value="10000000"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Harga Jual per Unit (Rp):
+                </label>
+
+                <input
+                    type="number"
+                    id="f-bep-p"
+                    value="50000"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Biaya Variabel per Unit (Rp):
+                </label>
+
+                <input
+                    type="number"
+                    id="f-bep-vc"
+                    value="30000"
+                >
+            </div>
+        `;
+
+    }
+
+}
+
+
+function processFinance() {
+
+    const type =
+        document.getElementById('fin-type').value;
+
+    const res =
+        document.getElementById('fin-result');
+
+
+    if(type === 'simple_interest') {
+
+        let pv =
+            parseFloat(
+                document.getElementById('f-pv').value
+            );
+
+        let r =
+            parseFloat(
+                document.getElementById('f-rate').value
+            )/100;
+
+        let t =
+            parseFloat(
+                document.getElementById('f-time').value
+            );
+
+        let interest =
+            pv*r*t;
+
+        res.innerText =
+            `Bunga Total: Rp ${interest.toLocaleString()}
+Total Akhir: Rp ${(pv+interest).toLocaleString()}`;
+
+    }
+
+
+    else if(type === 'compound_interest') {
+
+        let pv =
+            parseFloat(
+                document.getElementById('f-pv').value
+            );
+
+        let r =
+            parseFloat(
+                document.getElementById('f-rate').value
+            )/100;
+
+        let t =
+            parseFloat(
+                document.getElementById('f-time').value
+            );
+
+        let fv =
+            pv*Math.pow(1+r,t);
+
+        res.innerText =
+            `Hasil Akhir Investment: Rp ${Math.round(fv).toLocaleString()}`;
+
+    }
+
+
+    else if(type === 'mortgage') {
+
+        let p =
+            parseFloat(
+                document.getElementById('f-kpr-p').value
+            );
+
+        let r =
+            (
+                parseFloat(
+                    document.getElementById('f-kpr-r').value
+                )/100
+            )/12;
+
+        let n =
+            parseFloat(
+                document.getElementById('f-kpr-t').value
+            )*12;
+
+        let monthly =
+            (
+                p*r*Math.pow(1+r,n)
+            )/
+            (
+                Math.pow(1+r,n)-1
+            );
+
+        res.innerText =
+            `Cicilan per Bulan: Rp ${Math.round(monthly).toLocaleString()}`;
+
+    }
+
+
+    else if(type === 'roi') {
+
+        let inv =
+            parseFloat(
+                document.getElementById('f-roi-i').value
+            );
+
+        let gain =
+            parseFloat(
+                document.getElementById('f-roi-g').value
+            );
+
+        let roi =
+            ((gain-inv)/inv)*100;
+
+        res.innerText =
+            `ROI = ${roi.toFixed(2)}%`;
+
+    }
+
+
+    else if(type === 'bep') {
+
+        let fc =
+            parseFloat(
+                document.getElementById('f-bep-fc').value
+            );
+
+        let p =
+            parseFloat(
+                document.getElementById('f-bep-p').value
+            );
+
+        let vc =
+            parseFloat(
+                document.getElementById('f-bep-vc').value
+            );
+
+        let bepUnit =
+            fc/(p-vc);
+
+        res.innerText =
+            `Break Even Point (BEP): ${Math.ceil(bepUnit)} Unit Produk`;
+
+    }
+
+}
+
+
+/* =========================
+   UNIT CONVERTER
+========================= */
+
+const unitMap = {
+
+    length: {
+        'Meter':1,
+        'Kilometer':1000,
+        'Centimeter':0.01,
+        'Inch':0.0254,
+        'Feet':0.3048,
+        'Mile':1609.34
+    },
+
+    weight: {
+        'Gram':1,
+        'Kilogram':1000,
+        'Ounce (oz)':28.3495,
+        'Pound (lb)':453.592
+    },
+
+    temp:[
+        'Celsius',
+        'Fahrenheit',
+        'Kelvin'
+    ],
+
+    time:{
+        'Detik':1,
+        'Menit':60,
+        'Jam':3600,
+        'Hari':86400
+    },
+
+    data:{
+        'Byte':1,
+        'KB':1024,
+        'MB':1048576,
+        'GB':1073741824,
+        'TB':1099511627776
+    }
+
+};
+
+
+function updateUnitDropdowns() {
+
+    const cat =
+        document.getElementById('unit-cat').value;
+
+    const from =
+        document.getElementById('unit-from');
+
+    const to =
+        document.getElementById('unit-to');
+
+    from.innerHTML = '';
+
+    to.innerHTML = '';
+
+    let keys =
+        cat === 'temp'
+        ? unitMap.temp
+        : Object.keys(unitMap[cat]);
+
+    keys.forEach(k => {
+
+        from.add(
+            new Option(k,k)
+        );
+
+        to.add(
+            new Option(k,k)
+        );
+
+    });
+
+    processUnit();
+
+}
+
+
+function processUnit() {
+
+    const cat =
+        document.getElementById('unit-cat').value;
+
+    const val =
+        parseFloat(
+            document.getElementById('unit-val').value
+        );
+
+    const from =
+        document.getElementById('unit-from').value;
+
+    const to =
+        document.getElementById('unit-to').value;
+
+    const res =
+        document.getElementById('unit-result');
+
+
+    if(isNaN(val)) {
+
+        res.innerText =
+            "Hasil Konversi: -";
+
+        return;
+
+    }
+
+
+    if(cat === 'temp') {
+
+        let c =
+            from === 'Celsius'
+            ? val
+            : from === 'Fahrenheit'
+            ? (val-32)*5/9
+            : val-273.15;
+
+        let out =
+            to === 'Celsius'
+            ? c
+            : to === 'Fahrenheit'
+            ? (c*9/5)+32
+            : c+273.15;
+
+        res.innerText =
+            `Hasil: ${out.toFixed(2)} ${to}`;
+
+    }
+
+
+    else {
+
+        let base =
+            val*unitMap[cat][from];
+
+        let out =
+            base/unitMap[cat][to];
+
+        res.innerText =
+            `Hasil: ${out.toLocaleString()} ${to}`;
+
+    }
+
+}
+
+
+/* =========================
+   PROGRAMMER
+========================= */
+
+function processProgrammer() {
+
+    let val =
+        parseInt(
+            document.getElementById('prog-num').value
+        );
+
+    let res =
+        document.getElementById('prog-result');
+
+
+    if(isNaN(val)) {
+
+        res.innerHTML =
+            "BIN: -<br>OCT: -<br>HEX: -";
+
+        return;
+
+    }
+
+
+    res.innerHTML =
+        `BIN: ${val.toString(2)}
+        <br>OCT: ${val.toString(8)}
+        <br>HEX: ${val.toString(16).toUpperCase()}`;
+
+}
+
+
+function processASCII() {
+
+    let text =
+        document.getElementById('prog-text').value;
+
+    let codes =
+        text
+        .split('')
+        .map(c => c.charCodeAt(0))
+        .join(' ');
+
+    document
+        .getElementById('ascii-result')
+        .innerText =
+        `ASCII Code: ${codes || '-'}`;
+
+}
+
+
+/* =========================
+   SCIENCE
+========================= */
+
+function renderScienceForm() {
+
+    const type =
+        document.getElementById('sci-type').value;
+
+    const target =
+        document.getElementById('sci-inputs');
+
+
+    if(type === 'speed') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Jarak / s (m):</label>
+                <input type="number" id="s-s" value="100">
+            </div>
+
+            <div class="form-group">
+                <label>Waktu / t (s):</label>
+                <input type="number" id="s-t" value="10">
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'force') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Massa / m (kg):</label>
+                <input type="number" id="s-m" value="50">
+            </div>
+
+            <div class="form-group">
+                <label>Percepatan / a (m/s²):</label>
+                <input type="number" id="s-a" value="9.8">
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'ohms_law') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Arus Listrik / I (Ampere):</label>
+                <input type="number" id="s-i" value="2">
+            </div>
+
+            <div class="form-group">
+                <label>Hambatan / R (Ohm):</label>
+                <input type="number" id="s-r" value="10">
+            </div>
+        `;
+
+    }
+
+
+    else if(type === 'density') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Massa (kg):</label>
+                <input type="number" id="s-dm" value="200">
+            </div>
+
+            <div class="form-group">
+                <label>Volume (m³):</label>
+                <input type="number" id="s-dv" value="2">
+            </div>
+        `;
+
+    }
+
+}
+
+
+function processScience() {
+
+    const type =
+        document.getElementById('sci-type').value;
+
+    const res =
+        document.getElementById('sci-result');
+
+
+    if(type === 'speed') {
+
+        res.innerText =
+            `Kecepatan (v) = ${
+                (
+                    parseFloat(
+                        document.getElementById('s-s').value
+                    ) /
+                    parseFloat(
+                        document.getElementById('s-t').value
+                    )
+                ).toFixed(2)
+            } m/s`;
+
+    }
+
+
+    if(type === 'force') {
+
+        res.innerText =
+            `Gaya (F) = ${
+                (
+                    parseFloat(
+                        document.getElementById('s-m').value
+                    ) *
+                    parseFloat(
+                        document.getElementById('s-a').value
+                    )
+                ).toFixed(2)
+            } N`;
+
+    }
+
+
+    if(type === 'ohms_law') {
+
+        res.innerText =
+            `Tegangan (V) = ${
+                (
+                    parseFloat(
+                        document.getElementById('s-i').value
+                    ) *
+                    parseFloat(
+                        document.getElementById('s-r').value
+                    )
+                ).toFixed(2)
+            } Volt`;
+
+    }
+
+
+    if(type === 'density') {
+
+        res.innerText =
+            `Massa Jenis (ρ) = ${
+                (
+                    parseFloat(
+                        document.getElementById('s-dm').value
+                    ) /
+                    parseFloat(
+                        document.getElementById('s-dv').value
+                    )
+                ).toFixed(2)
+            } kg/m³`;
+
+    }
+
+}
+
+
+/* =========================
+   GEOMETRY
+========================= */
+
+function renderGeoForm() {
+
+    const type =
+        document.getElementById('geo-type').value;
+
+    const target =
+        document.getElementById('geo-inputs');
+
+
+    if(type === 'rectangle') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Panjang:</label>
+                <input type="number" id="g-p" value="10">
+            </div>
+
+            <div class="form-group">
+                <label>Lebar:</label>
+                <input type="number" id="g-l" value="5">
+            </div>
+        `;
+
+    }
+
+
+    if(type === 'circle') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Jari-jari (r):</label>
+                <input type="number" id="g-r" value="7">
+            </div>
+        `;
+
+    }
+
+
+    if(type === 'cylinder') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Jari-jari (r):</label>
+                <input type="number" id="g-cr" value="7">
+            </div>
+
+            <div class="form-group">
+                <label>Tinggi (h):</label>
+                <input type="number" id="g-ch" value="10">
+            </div>
+        `;
+
+    }
+
+
+    if(type === 'sphere') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Jari-jari (r):</label>
+                <input type="number" id="g-sr" value="7">
+            </div>
+        `;
+
+    }
+
+}
+
+
+function processGeometry() {
+
+    const type =
+        document.getElementById('geo-type').value;
+
+    const res =
+        document.getElementById('geo-result');
+
+
+    if(type === 'rectangle') {
+
+        let p =
+            parseFloat(
+                document.getElementById('g-p').value
+            );
+
+        let l =
+            parseFloat(
+                document.getElementById('g-l').value
+            );
+
+        res.innerText =
+            `Luas: ${p*l}
+Keliling: ${2*(p+l)}`;
+
+    }
+
+
+    else if(type === 'circle') {
+
+        let r =
+            parseFloat(
+                document.getElementById('g-r').value
+            );
+
+        res.innerText =
+            `Luas: ${(Math.PI*r*r).toFixed(2)}
+Keliling: ${(2*Math.PI*r).toFixed(2)}`;
+
+    }
+
+
+    else if(type === 'cylinder') {
+
+        let r =
+            parseFloat(
+                document.getElementById('g-cr').value
+            );
+
+        let h =
+            parseFloat(
+                document.getElementById('g-ch').value
+            );
+
+        res.innerText =
+            `Volume: ${(Math.PI*r*r*h).toFixed(2)}
+Luas Permukaan: ${(2*Math.PI*r*(r+h)).toFixed(2)}`;
+
+    }
+
+
+    else if(type === 'sphere') {
+
+        let r =
+            parseFloat(
+                document.getElementById('g-sr').value
+            );
+
+        res.innerText =
+            `Volume: ${
+                (4/3*Math.PI*Math.pow(r,3)).toFixed(2)
+            }`;
+
+    }
+
+}
+
+
+/* =========================
+   DATE TIME
+========================= */
+
+function processDateTime() {
+
+    let d1 =
+        new Date(
+            document.getElementById('dt-start').value
+        );
+
+    let d2 =
+        new Date(
+            document.getElementById('dt-end').value
+        );
+
+    let res =
+        document.getElementById('dt-result');
+
+
+    if(isNaN(d1) || isNaN(d2)) {
+
+        res.innerText =
+            "Masukkan kedua tanggal!";
+
+        return;
+
+    }
+
+
+    let diffDays =
+        Math.ceil(
+            Math.abs(d2-d1) /
+            (1000*60*60*24)
+        );
+
+    let years =
+        Math.floor(diffDays/365);
+
+    res.innerText =
+        `Selisih Total: ${diffDays} Hari
+Estimasi Usia/Rentang: ${years} Tahun ${Math.floor((diffDays%365)/30)} Bulan`;
+
+}
+
+
+/* =========================
+   LIFESTYLE
+========================= */
+
+function renderLifeForm() {
+
+    const type =
+        document.getElementById('life-type').value;
+
+    const target =
+        document.getElementById('life-inputs');
+
+
+    if(type === 'tip') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Total Tagihan (Rp):</label>
+                <input type="number" id="l-bill" value="200000">
+            </div>
+
+            <div class="form-group">
+                <label>Tip (%):</label>
+                <input type="number" id="l-tip" value="10">
+            </div>
+
+            <div class="form-group">
+                <label>Jumlah Orang:</label>
+                <input type="number" id="l-people" value="4">
+            </div>
+        `;
+
+    }
+
+
+    if(type === 'fuel') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Jarak Tempuh (km):</label>
+                <input type="number" id="l-dist" value="150">
+            </div>
+
+            <div class="form-group">
+                <label>Rasio BBM (km/liter):</label>
+                <input type="number" id="l-ratio" value="12">
+            </div>
+
+            <div class="form-group">
+                <label>Harga BBM per Liter (Rp):</label>
+                <input type="number" id="l-price" value="13000">
+            </div>
+        `;
+
+    }
+
+
+    if(type === 'paint') {
+
+        target.innerHTML = `
+            <div class="form-group">
+                <label>Luas Dinding Total (m²):</label>
+                <input type="number" id="l-wall" value="40">
+            </div>
+        `;
+
+    }
+
+}
+
+
+function processLifestyle() {
+
+    const type =
+        document.getElementById('life-type').value;
+
+    const res =
+        document.getElementById('life-result');
+
+
+    if(type === 'tip') {
+
+        let bill =
+            parseFloat(
+                document.getElementById('l-bill').value
+            );
+
+        let tip =
+            bill *
+            (
+                parseFloat(
+                    document.getElementById('l-tip').value
+                )/100
+            );
+
+        let total =
+            bill+tip;
+
+        let people =
+            parseFloat(
+                document.getElementById('l-people').value
+            );
+
+        res.innerText =
+            `Total + Tip: Rp ${total.toLocaleString()}
+Per Orang: Rp ${(total/people).toLocaleString()}`;
+
+    }
+
+
+    else if(type === 'fuel') {
+
+        let liters =
+            parseFloat(
+                document.getElementById('l-dist').value
+            ) /
+            parseFloat(
+                document.getElementById('l-ratio').value
+            );
+
+        let cost =
+            liters *
+            parseFloat(
+                document.getElementById('l-price').value
+            );
+
+        res.innerText =
+            `Kebutuhan BBM: ${liters.toFixed(1)} Liter
+Total Biaya: Rp ${Math.round(cost).toLocaleString()}`;
+
+    }
+
+
+    else if(type === 'paint') {
+
+        let liters =
+            parseFloat(
+                document.getElementById('l-wall').value
+            )/10;
+
+        res.innerText =
+            `Estimasi Kebutuhan Cat: ${Math.ceil(liters)} Liter (1 Lapis)`;
+
+    }
+
+}
+
+
+/* =========================
+   STATISTIK
+========================= */
+
+function processStats() {
+
+    let raw =
+        document.getElementById('stats-data').value;
+
+    let arr =
+        raw
+        .split(',')
+        .map(n => parseFloat(n.trim()))
+        .filter(n => !isNaN(n));
+
+    let res =
+        document.getElementById('stats-result');
+
+
+    if(arr.length === 0) {
+
+        res.innerText =
+            "Masukkan data angka valid!";
+
+        return;
+
+    }
+
+
+    arr.sort(
+        (a,b) => a-b
+    );
+
+
+    let sum =
+        arr.reduce(
+            (a,b) => a+b,
+            0
+        );
+
+
+    let mean =
+        sum/arr.length;
+
+
+    let median =
+        arr.length%2 === 0
+        ?
+        (
+            arr[arr.length/2-1] +
+            arr[arr.length/2]
+        )/2
+        :
+        arr[Math.floor(arr.length/2)];
+
+
+    let variance =
+        arr.reduce(
+            (a,b) =>
+                a + Math.pow(b-mean,2),
+            0
+        )/arr.length;
+
+
+    res.innerText =
+        `Jumlah Data (n): ${arr.length}
+Mean: ${mean.toFixed(2)}
+Median: ${median}
+Min / Max: ${arr[0]} / ${arr[arr.length-1]}
+Standar Deviasi: ${Math.sqrt(variance).toFixed(2)}`;
+
+}
+
+
+/* =========================
+   AI SOLVER
+========================= */
+
+function processAISolver() {
+
+    let q =
+        document
+        .getElementById('ai-prompt')
+        .value
+        .toLowerCase();
+
+    let res =
+        document.getElementById('ai-result');
+
+
+    res.innerText =
+        "🤖 Astro AI sedang menganalisis soal...\n";
+
+
+    setTimeout(() => {
+
+        if(
+            q.includes('lingkaran') &&
+            (
+                q.includes('diameter') ||
+                q.includes('jari')
+            )
+        ) {
+
+            let num =
+                q.match(/\d+/);
+
+            let val =
+                num
+                ? parseFloat(num[0])
+                : 20;
+
+            let r =
+                q.includes('diameter')
+                ? val/2
+                : val;
+
+            let area =
+                Math.PI*r*r;
+
+
+            res.innerText =
+                `💡 LANGKAH PENYELESAIAN AI:
+
+1. Diketahui:
+   r = ${r} cm
+
+2. Rumus Luas Lingkaran:
+   L = π × r²
+
+3. Perhitungan:
+   L = 3.14159 × ${r}²
+
+✅ HASIL AKHIR:
+${area.toFixed(2)} cm²`;
+
         }
-        function useHistory(item) { expr = item.split(' = ')[1]; updateDisplay(); }
 
-        function calcFactorialDirect() {
-            let n = parseInt(expr);
-            if(isNaN(n) || n < 0) return;
-            let f = 1; for(let i=1; i<=n; i++) f*=i;
-            expr = f.toString(); updateDisplay();
+
+        else {
+
+            res.innerText =
+                `💡 JAWABAN AI ENGINE:
+
+Maaf, solver saat ini dikonfigurasi untuk memproses soal bahasa natural Geometri/Aritmatika sederhana.
+
+Cobalah contoh:
+"Hitung luas lingkaran dengan diameter 20 cm".`;
+
         }
 
-        function renderMathForm() {
-            const type = document.getElementById('math-type').value;
-            const target = document.getElementById('math-inputs');
-            if(type === 'fpb_kpk') {
-                target.innerHTML = `<div class="form-group"><label>Angka A:</label><input type="number" id="m-a" value="12"></div>
-                                    <div class="form-group"><label>Angka B:</label><input type="number" id="m-b" value="18"></div>`;
-            } else if(type === 'prime') {
-                target.innerHTML = `<div class="form-group"><label>Masukkan Angka:</label><input type="number" id="m-prime" value="29"></div>`;
-            } else if(type === 'quadratic') {
-                target.innerHTML = `<div class="form-group"><label>Nilai a:</label><input type="number" id="m-qa" value="1"></div>
-                                    <div class="form-group"><label>Nilai b:</label><input type="number" id="m-qb" value="-3"></div>
-                                    <div class="form-group"><label>Nilai c:</label><input type="number" id="m-qc" value="2"></div>`;
-            } else if(type === 'matrix') {
-                target.innerHTML = `<div class="form-group"><label>Matriks 2x2 [a, b; c, d]:</label>
-                                    <input type="number" id="m-a1" placeholder="a" value="1"> <input type="number" id="m-b1" placeholder="b" value="2">
-                                    <input type="number" id="m-c1" placeholder="c" value="3"> <input type="number" id="m-d1" placeholder="d" value="4"></div>`;
-            }
-        }
+    },500);
 
-        function processMath() {
-            const type = document.getElementById('math-type').value;
-            const res = document.getElementById('math-result');
-            if(type === 'fpb_kpk') {
-                let a = parseInt(document.getElementById('m-a').value);
-                let b = parseInt(document.getElementById('m-b').value);
-                let gcd = (x, y) => y === 0 ? x : gcd(y, x % y);
-                let fpb = gcd(a, b);
-                let kpk = (a * b) / fpb;
-                res.innerText = `FPB: ${fpb}\nKPK: ${kpk}`;
-            } else if(type === 'prime') {
-                let n = parseInt(document.getElementById('m-prime').value);
-                let isPrime = n > 1;
-                for(let i=2; i<=Math.sqrt(n); i++) if(n % i === 0) isPrime = false;
-                res.innerText = `${n} Adalah Bilangan Prima? ${isPrime ? 'YA ✅' : 'BUKAN ❌'}`;
-            } else if(type === 'quadratic') {
-                let a = parseFloat(document.getElementById('m-qa').value);
-                let b = parseFloat(document.getElementById('m-qb').value);
-                let c = parseFloat(document.getElementById('m-qc').value);
-                let d = b*b - 4*a*c;
-                if(d < 0) res.innerText = "Akar-akar Imajiner (D < 0)";
-                else {
-                    let x1 = (-b + Math.sqrt(d)) / (2*a);
-                    let x2 = (-b - Math.sqrt(d)) / (2*a);
-                    res.innerText = `x₁ = ${x1.toFixed(2)}\nx₂ = ${x2.toFixed(2)}`;
-                }
-            } else if(type === 'matrix') {
-                let a = parseFloat(document.getElementById('m-a1').value);
-                let b = parseFloat(document.getElementById('m-b1').value);
-                let c = parseFloat(document.getElementById('m-c1').value);
-                let d = parseFloat(document.getElementById('m-d1').value);
-                let det = (a * d) - (b * c);
-                res.innerText = `Determinan Matriks = ${det}`;
-            }
-        }
+}
 
-        function renderFinanceForm() {
-            const type = document.getElementById('fin-type').value;
-            const target = document.getElementById('fin-inputs');
-            if(type === 'simple_interest' || type === 'compound_interest') {
-                target.innerHTML = `<div class="form-group"><label>Modal / Pinjaman Awal (Rp):</label><input type="number" id="f-pv" value="10000000"></div>
-                                    <div class="form-group"><label>Bunga per Tahun (%):</label><input type="number" id="f-rate" value="10"></div>
-                                    <div class="form-group"><label>Waktu (Tahun):</label><input type="number" id="f-time" value="2"></div>`;
-            } else if(type === 'mortgage') {
-                target.innerHTML = `<div class="form-group"><label>Plafond Pinjaman KPR (Rp):</label><input type="number" id="f-kpr-p" value="300000000"></div>
-                                    <div class="form-group"><label>Bunga Tahunan (%):</label><input type="number" id="f-kpr-r" value="8"></div>
-                                    <div class="form-group"><label>Tenor (Tahun):</label><input type="number" id="f-kpr-t" value="15"></div>`;
-            } else if(type === 'roi') {
-                target.innerHTML = `<div class="form-group"><label>Investasi Awal (Rp):</label><input type="number" id="f-roi-i" value="50000000"></div>
-                                    <div class="form-group"><label>Total Keuntungan / Hasil (Rp):</label><input type="number" id="f-roi-g" value="65000000"></div>`;
-            } else if(type === 'bep') {
-                target.innerHTML = `<div class="form-group"><label>Biaya Tetap / Fixed Cost (Rp):</label><input type="number" id="f-bep-fc" value="10000000"></div>
-                                    <div class="form-group"><label>Harga Jual per Unit (Rp):</label><input type="number" id="f-bep-p" value="50000"></div>
-                                    <div class="form-group"><label>Biaya Variabel per Unit (Rp):</label><input type="number" id="f-bep-vc" value="30000"></div>`;
-            }
-        }
 
-        function processFinance() {
-            const type = document.getElementById('fin-type').value;
-            const res = document.getElementById('fin-result');
-            if(type === 'simple_interest') {
-                let pv = parseFloat(document.getElementById('f-pv').value);
-                let r = parseFloat(document.getElementById('f-rate').value) / 100;
-                let t = parseFloat(document.getElementById('f-time').value);
-                let interest = pv * r * t;
-                res.innerText = `Bunga Total: Rp ${(interest).toLocaleString()}\nTotal Akhir: Rp ${(pv + interest).toLocaleString()}`;
-            } else if(type === 'compound_interest') {
-                let pv = parseFloat(document.getElementById('f-pv').value);
-                let r = parseFloat(document.getElementById('f-rate').value) / 100;
-                let t = parseFloat(document.getElementById('f-time').value);
-                let fv = pv * Math.pow((1 + r), t);
-                res.innerText = `Hasil Akhir Investment: Rp ${Math.round(fv).toLocaleString()}`;
-            } else if(type === 'mortgage') {
-                let p = parseFloat(document.getElementById('f-kpr-p').value);
-                let r = (parseFloat(document.getElementById('f-kpr-r').value) / 100) / 12;
-                let n = parseFloat(document.getElementById('f-kpr-t').value) * 12;
-                let monthly = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-                res.innerText = `Cicilan per Bulan: Rp ${Math.round(monthly).toLocaleString()}`;
-            } else if(type === 'roi') {
-                let inv = parseFloat(document.getElementById('f-roi-i').value);
-                let gain = parseFloat(document.getElementById('f-roi-g').value);
-                let roi = ((gain - inv) / inv) * 100;
-                res.innerText = `ROI = ${roi.toFixed(2)}%`;
-            } else if(type === 'bep') {
-                let fc = parseFloat(document.getElementById('f-bep-fc').value);
-                let p = parseFloat(document.getElementById('f-bep-p').value);
-                let vc = parseFloat(document.getElementById('f-bep-vc').value);
-                let bepUnit = fc / (p - vc);
-                res.innerText = `Break Even Point (BEP): ${Math.ceil(bepUnit)} Unit Produk`;
-            }
-        }
+/* =========================
+   START APPLICATION
+========================= */
 
-        const unitMap = {
-            length: { 'Meter': 1, 'Kilometer': 1000, 'Centimeter': 0.01, 'Inch': 0.0254, 'Feet': 0.3048, 'Mile': 1609.34 },
-            weight: { 'Gram': 1, 'Kilogram': 1000, 'Ounce (oz)': 28.3495, 'Pound (lb)': 453.592 },
-            temp: ['Celsius', 'Fahrenheit', 'Kelvin'],
-            time: { 'Detik': 1, 'Menit': 60, 'Jam': 3600, 'Hari': 86400 },
-            data: { 'Byte': 1, 'KB': 1024, 'MB': 1048576, 'GB': 1073741824, 'TB': 1099511627776 }
-        };
+switchModule();
 
-        function updateUnitDropdowns() {
-            const cat = document.getElementById('unit-cat').value;
-            const from = document.getElementById('unit-from');
-            const to = document.getElementById('unit-to');
-            from.innerHTML = ''; to.innerHTML = '';
-            let keys = (cat === 'temp') ? unitMap.temp : Object.keys(unitMap[cat]);
-            keys.forEach(k => { from.add(new Option(k, k)); to.add(new Option(k, k)); });
-            processUnit();
-        }
+</script>
 
-        function processUnit() {
-            const cat = document.getElementById('unit-cat').value;
-            const val = parseFloat(document.getElementById('unit-val').value);
-            const from = document.getElementById('unit-from').value;
-            const to = document.getElementById('unit-to').value;
-            const res = document.getElementById('unit-result');
-            if(isNaN(val)) return res.innerText = "Hasil Konversi: -";
-
-            if(cat === 'temp') {
-                let c = from === 'Celsius' ? val : (from === 'Fahrenheit' ? (val-32)*5/9 : val-273.15);
-                let out = to === 'Celsius' ? c : (to === 'Fahrenheit' ? (c*9/5)+32 : c+273.15);
-                res.innerText = `Hasil: ${out.toFixed(2)} °${to[0]}`;
-            } else {
-                let base = val * unitMap[cat][from];
-                let out = base / unitMap[cat][to];
-                res.innerText = `Hasil: ${out.toLocaleString()} ${to}`;
-            }
-        }
-
-        function processProgrammer() {
-            let val = parseInt(document.getElementById('prog-num').value);
-            let res = document.getElementById('prog-result');
-            if(isNaN(val)) return res.innerHTML = "BIN: -<br>OCT: -<br>HEX: -";
-            res.innerHTML = `BIN: ${val.toString(2)}<br>OCT: ${val.toString(8)}<br>HEX: ${val.toString(16).toUpperCase()}`;
-        }
-
-        function processASCII() {
-            let text = document.getElementById('prog-text').value;
-            let codes = text.split('').map(c => c.charCodeAt(0)).join(' ');
-            document.getElementById('ascii-result').innerText = `ASCII Code: ${codes || '-'}`;
-        }
-
-        function renderScienceForm() {
-            const type = document.getElementById('sci-type').value;
-            const target = document.getElementById('sci-inputs');
-            if(type === 'speed') {
-                target.innerHTML = `<div class="form-group"><label>Jarak / s (Meter):</label><input type="number" id="s-dist" value="100"></div>
-                                    <div class="form-group"><label>Waktu / t (Detik):</label><input type="number" id="s-time" value="10"></div>`;
-            } else if(type === 'force') {
-                target.innerHTML = `<div class="form-group"><label>Massa / m (kg):</label><input type="number" id="s-mass" value="10"></div>
-                                    <div class="form-group"><label>Percepatan / a (m/s²):</label><input type="number" id="s-acc" value="9.8"></div>`;
-            } else if(type === 'ohms_law') {
-                target.innerHTML = `<div class="form-group"><label>Arus Listrik / I (Ampere):</label><input type="number" id="s-curr" value="2"></div>
-                                    <div class="form-group"><label>Hambatan / R (Ohm):</label><input type="number" id="s-res" value="10"></div>`;
-            } else if(type === 'density') {
-                target.innerHTML = `<div class="form-group"><label>Massa / m (kg):</label><input type="number" id="s-d-m" value="50"></div>
-                                    <div class="form-group"><label>Volume / V (m³):</label><input type="number" id="s-d-v" value="2"></div>`;
-            }
-        }
-
-        function processScience() {
-            const type = document.getElementById('sci-type').value;
-            const res = document.getElementById('sci-result');
-            if(type === 'speed') {
-                let s = parseFloat(document.getElementById('s-dist').value);
-                let t = parseFloat(document.getElementById('s-time').value);
-                res.innerText = `Kecepatan (v) = ${(s / t).toFixed(2)} m/s`;
-            } else if(type === 'force') {
-                let m = parseFloat(document.getElementById('s-mass').value);
-                let a = parseFloat(document.getElementById('s-acc').value);
-                res.innerText = `Gaya (F) = ${(m * a).toFixed(2)} N`;
-            } else if(type === 'ohms_law') {
-                let i = parseFloat(document.getElementById('s-curr').value);
-                let r = parseFloat(document.getElementById('s-res').value);
-                res.innerText = `Tegangan Listrik (V) = ${(i * r).toFixed(2)} Volt`;
-            } else if(type === 'density') {
-                let m = parseFloat(document.getElementById('s-d-m').value);
-                let v = parseFloat(document.getElementById('s-d-v').value);
-                res.innerText = `Massa Jenis (ρ) = ${(m / v).toFixed(2)} kg/m³`;
-            }
-        }
-
-        function renderGeoForm() {
-            const type = document.getElementById('geo-type').value;
-            const target = document.getElementById('geo-inputs');
-            if(type === 'rectangle') {
-                target.innerHTML = `<div class="form-group"><label>Panjang (p):</label><input type="number" id="g-p" value="10"></div>
-                                    <div class="form-group"><label>Lebar (l):</label><input type="number" id="g-l" value="5"></div>`;
-            } else if(type === 'circle') {
-                target.innerHTML = `<div class="form-group"><label>Jari-jari (r):</label><input type="number" id="g-r" value="7"></div>`;
-            } else if(type === 'cylinder') {
-                target.innerHTML = `<div class="form-group"><label>Jari-jari Alas (r):</label><input type="number" id="g-cr" value="7"></div>
-                                    <div class="form-group"><label>Tinggi Tabung (t):</label><input type="number" id="g-ct" value="10"></div>`;
-            } else if(type === 'sphere') {
-                target.innerHTML = `<div class="form-group"><label>Jari-jari Bola (r):</label><input type="number" id="g-sr" value="10"></div>`;
-            }
-        }
-
-        function processGeometry() {
-            const type = document.getElementById('geo-type').value;
-            const res = document.getElementById('geo-result');
-            if(type === 'rectangle') {
-                let p = parseFloat(document.getElementById('g-p').value);
-                let l = parseFloat(document.getElementById('g-l').value);
-                res.innerText = `Luas = ${p * l}\nKeliling = ${2 * (p + l)}`;
-            } else if(type === 'circle') {
-                let r = parseFloat(document.getElementById('g-r').value);
-                res.innerText = `Luas = ${(Math.PI * r * r).toFixed(2)}\nKeliling = ${(2 * Math.PI * r).toFixed(2)}`;
-            } else if(type === 'cylinder') {
-                let r = parseFloat(document.getElementById('g-cr').value);
-                let t = parseFloat(document.getElementById('g-ct').value);
-                let vol = Math.PI * r * r * t;
-                let area = 2 * Math.PI * r * (r + t);
-                res.innerText = `Volume Tabung = ${vol.toFixed(2)}\nLuas Permukaan = ${area.toFixed(2)}`;
-            } else if(type === 'sphere') {
-                let r = parseFloat(document.getElementById('g-sr').value);
-                let vol = (4/3) * Math.PI * Math.pow(r, 3);
-                let area = 4 * Math.PI * r * r;
-                res.innerText = `Volume Bola = ${vol.toFixed(2)}\nLuas Permukaan = ${area.toFixed(2)}`;
-            }
-        }
-
-        function processDateTime() {
-            const d1 = new Date(document.getElementById('dt-start').value);
-            const d2 = new Date(document.getElementById('dt-end').value || new Date());
-            const res = document.getElementById('dt-result');
-            
-            if(isNaN(d1)) return res.innerText = "Pilih tanggal awal terlebih dahulu.";
-            
-            let diffTime = Math.abs(d2 - d1);
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            let years = Math.floor(diffDays / 365);
-            let remainingDays = diffDays % 365;
-
-            res.innerText = `Selisih Waktu: ${diffDays} Hari\n(Setara: ~${years} Tahun, ${remainingDays} Hari)`;
-        }
-
-        function renderLifeForm() {
-            const type = document.getElementById('life-type').value;
-            const target = document.getElementById('life-inputs');
-            if(type === 'tip') {
-                target.innerHTML = `<div class="form-group"><label>Total Tagihan (Rp):</label><input type="number" id="li-bill" value="150000"></div>
-                                    <div class="form-group"><label>Persen Tip (%):</label><input type="number" id="li-tip" value="10"></div>
-                                    <div class="form-group"><label>Jumlah Orang:</label><input type="number" id="li-ppl" value="3"></div>`;
-            } else if(type === 'fuel') {
-                target.innerHTML = `<div class="form-group"><label>Jarak Tempuh (KM):</label><input type="number" id="li-dist" value="120"></div>
-                                    <div class="form-group"><label>Konsumsi BBM (KM / Liter):</label><input type="number" id="li-eff" value="12"></div>
-                                    <div class="form-group"><label>Harga BBM per Liter (Rp):</label><input type="number" id="li-price" value="13000"></div>`;
-            } else if(type === 'paint') {
-                target.innerHTML = `<div class="form-group"><label>Luas Dinding Total (m²):</label><input type="number" id="li-wall" value="40"></div>
-                                    <div class="form-group"><label>Daya Sebar Cat (m² / Liter):</label><input type="number" id="li-p-cov" value="10"></div>`;
-            }
-        }
-
-        function processLifestyle() {
-            const type = document.getElementById('life-type').value;
-            const res = document.getElementById('life-result');
-            if(type === 'tip') {
-                let bill = parseFloat(document.getElementById('li-bill').value);
-                let tip = parseFloat(document.getElementById('li-tip').value);
-                let ppl = parseInt(document.getElementById('li-ppl').value);
-                let totalTip = bill * (tip / 100);
-                let grandTotal = bill + totalTip;
-                res.innerText = `Total Tip: Rp ${totalTip.toLocaleString()}\nTotal Tagihan: Rp ${grandTotal.toLocaleString()}\nBayar per Orang: Rp ${(grandTotal / ppl).toLocaleString()}`;
-            } else if(type === 'fuel') {
-                let dist = parseFloat(document.getElementById('li-dist').value);
-                let eff = parseFloat(document.getElementById('li-eff').value);
-                let price = parseFloat(document.getElementById('li-price').value);
-                let needed = dist / eff;
-                let cost = needed * price;
-                res.innerText = `BBM Dibutuhkan: ${needed.toFixed(1)} Liter\nEst. Biaya BBM: Rp ${Math.round(cost).toLocaleString()}`;
-            } else if(type === 'paint') {
-                let wall = parseFloat(document.getElementById('li-wall').value);
-                let cov = parseFloat(document.getElementById('li-p-cov').value);
-                let liters = wall / cov;
-                res.innerText = `Kebutuhan Cat (1 Lapis): ~${liters.toFixed(1)} Liter\nKebutuhan Cat (2 Lapis Standar): ~${(liters * 2).toFixed(1)} Liter`;
-            }
-        }
-
-        function processStats() {
-            const input = document.getElementById('stats-data').value;
-            const res = document.getElementById('stats-result');
-            let nums = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
-
-            if(nums.length === 0) return res.innerText = "Masukkan set angka yang valid.";
-
-            nums.sort((a, b) => a - b);
-            let sum = nums.reduce((a, b) => a + b, 0);
-            let mean = sum / nums.length;
-            
-            let median;
-            let mid = Math.floor(nums.length / 2);
-            if(nums.length % 2 === 0) median = (nums[mid - 1] + nums[mid]) / 2;
-            else median = nums[mid];
-
-            res.innerText = `Jumlah Data (N): ${nums.length}\nMean (Rata-rata): ${mean.toFixed(2)}\nMedian (Nilai Tengah): ${median}\nNilai Min: ${nums[0]}\nNilai Max: ${nums[nums.length - 1]}`;
-        }
-
-        function processAISolver() {
-            const prompt = document.getElementById('ai-prompt').value;
-            const res = document.getElementById('ai-result');
-            if(!prompt) return res.innerText = "Silakan tuliskan pertanyaan matematika Anda.";
-
-            res.innerText = "🤖 Astro AI sedang memproses matematika...";
-
-            setTimeout(() => {
-                try {
-                    let sanitized = prompt.toLowerCase();
-                    if (sanitized.includes("luas lingkaran")) {
-                        let matches = sanitized.match(/\d+/g);
-                        if (matches) {
-                            let val = parseFloat(matches[0]);
-                            let r = sanitized.includes("diameter") ? val / 2 : val;
-                            let area = Math.PI * r * r;
-                            res.innerText = `🤖 [AI Solusi]:\nRumus: L = π × r²\nJari-jari (r) = ${r} cm\nHasil Luas = ${area.toFixed(2)} cm²`;
-                            return;
-                        }
-                    }
-                    
-                    let exprMatch = prompt.match(/[0-9\.\+\-\*\/\(\)\^\s]+/g);
-                    if (exprMatch) {
-                        let cleanExpr = exprMatch.join('').trim();
-                        if (cleanExpr.length > 0) {
-                            let evalRes = eval(cleanExpr);
-                            res.innerText = `🤖 [AI Engine Analisis]:\nEkspresi Terdeteksi: ${cleanExpr}\nHasil Kalkulasi: ${evalRes}`;
-                            return;
-                        }
-                    }
-
-                    res.innerText = `🤖 [Astro AI]: Jawaban untuk "${prompt}" membutuhkan modul khusus/koneksi API server. Silakan gunakan kalkulator manual pada tab yang sesuai.`;
-                } catch(e) {
-                    res.innerText = "🤖 Astro AI: Maaf, format ekspresi matematika tidak dikenali.";
-                }
-            }, 800);
-        }
-
-        // Inisialisasi awal
-        switchModule();
-    </script>
 </body>
 </html>

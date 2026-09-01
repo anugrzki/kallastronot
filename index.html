@@ -112,7 +112,7 @@
         .btn:active { transform: translateY(1px); box-shadow: none; }
         .btn-op { color: var(--accent-cyan); font-weight: bold; }
         .btn-act { color: var(--accent-pink); font-weight: bold; }
-        .btn-eq { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); grid-column: span 3; color: white; font-weight: bold; }
+        .btn-eq { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); grid-column: span 2; color: white; font-weight: bold; }
 
         .form-module { display: none; flex-direction: column; gap: 14px; }
         .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -363,31 +363,57 @@
             ];
 
             const sciBtns = [
+                // Baris 1: Mode Angle & Trigonometri
                 { t: angleMode, c: 'btn-act', f: 'toggleAngleMode()' },
                 { t: 'sin', c: 'btn-op', f: "appendMath('sin')" },
                 { t: 'cos', c: 'btn-op', f: "appendMath('cos')" },
                 { t: 'tan', c: 'btn-op', f: "appendMath('tan')" },
 
+                // Baris 2: Logaritma & Konstanta
                 { t: 'ln', c: 'btn-op', f: "appendMath('log')" },
                 { t: 'log', c: 'btn-op', f: "appendMath('log10')" },
                 { t: 'e', c: 'btn-op', f: "append('Math.E')" },
                 { t: 'π', c: 'btn-op', f: "append('Math.PI')" },
 
+                // Baris 3: Kurung & Pangkat
                 { t: '(', c: 'btn-op', f: "append('(')" },
                 { t: ')', c: 'btn-op', f: "append(')')" },
                 { t: 'x²', c: 'btn-op', f: "append('**2')" },
                 { t: 'xⁿ', c: 'btn-op', f: "append('**')" },
 
+                // Baris 4: Akar, Faktorial & Pembersih
                 { t: '√', c: 'btn-op', f: "appendMath('sqrt')" },
                 { t: 'n!', c: 'btn-op', f: "calcFactorialDirect()" },
                 { t: 'AC', c: 'btn-act', f: 'clearAll()' },
                 { t: 'DEL', c: 'btn-act', f: 'delChar()' },
 
-                { t: '7', f: "append('7')" }, { t: '8', f: "append('8')" }, { t: '9', f: "append('9')" }, { t: '÷', c: 'btn-op', f: "append('/')" },
-                { t: '4', f: "append('4')" }, { t: '5', f: "append('5')" }, { t: '6', f: "append('6')" }, { t: '×', c: 'btn-op', f: "append('*')" },
-                { t: '1', f: "append('1')" }, { t: '2', f: "append('2')" }, { t: '3', f: "append('3')" }, { t: '-', c: 'btn-op', f: "append('-')" },
-                { t: '0', f: "append('0')" }, { t: '.', f: "append('.')" }, { t: '%', c: 'btn-op', f: "append('%')" }, { t: '+', c: 'btn-op', f: "append('+')" },
-                { t: '±', f: "toggleSign()" }, { t: '=', c: 'btn-eq', f: 'calculate()' }
+                // Baris 5: Angka 7, 8, 9 & Operator Bagi
+                { t: '7', f: "append('7')" },
+                { t: '8', f: "append('8')" },
+                { t: '9', f: "append('9')" },
+                { t: '÷', c: 'btn-op', f: "append('/')" },
+
+                // Baris 6: Angka 4, 5, 6 & Operator Kali
+                { t: '4', f: "append('4')" },
+                { t: '5', f: "append('5')" },
+                { t: '6', f: "append('6')" },
+                { t: '×', c: 'btn-op', f: "append('*')" },
+
+                // Baris 7: Angka 1, 2, 3 & Operator Kurang
+                { t: '1', f: "append('1')" },
+                { t: '2', f: "append('2')" },
+                { t: '3', f: "append('3')" },
+                { t: '-', c: 'btn-op', f: "append('-')" },
+
+                // Baris 8: Angka 0, Desimal, Persen & Operator Tambah
+                { t: '0', f: "append('0')" },
+                { t: '.', f: "append('.')" },
+                { t: '%', c: 'btn-op', f: "append('%')" },
+                { t: '+', c: 'btn-op', f: "append('+')" },
+
+                // Baris 9: Negatif & Sama Dengan
+                { t: '±', f: "toggleSign()" },
+                { t: '=', c: 'btn-eq', f: 'calculate()' }
             ];
 
             const list = (mode === 'scientific') ? sciBtns : basicBtns;

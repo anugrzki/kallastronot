@@ -54,6 +54,7 @@
             text-transform: uppercase; text-shadow: 0 0 10px var(--accent-cyan);
         }
 
+        /* --- STYLES UNTUK 5 KOLOM LOGO/FOTO --- */
         .logo-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -85,6 +86,13 @@
             object-fit: cover;
         }
 
+        .logo-placeholder {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2px;
+        }
+
         .mode-dropdown {
             width: 100%; padding: 12px; background: #0b0f19;
             border: 1px solid var(--accent-pink); border-radius: 10px;
@@ -112,7 +120,7 @@
         .btn:active { transform: translateY(1px); box-shadow: none; }
         .btn-op { color: var(--accent-cyan); font-weight: bold; }
         .btn-act { color: var(--accent-pink); font-weight: bold; }
-        .btn-eq { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); grid-column: span 3; color: white; font-weight: bold; }
+        .btn-eq { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); grid-column: span 2; color: white; font-weight: bold; }
 
         .form-module { display: none; flex-direction: column; gap: 14px; }
         .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -144,15 +152,25 @@
 
     <div class="astro-card">
         <div class="header">
-            <h1>👨‍🚀 KELOMPOK 2</h1>
+            <h1>👨‍🚀 AstroCalc Cosmic 12-in-1</h1>
         </div>
 
         <div class="logo-grid">
-            <div class="logo-slot"><img src="mk.jpeg" alt="Logo 1"></div>
-            <div class="logo-slot"><img src="mkk.jpeg" alt="Logo 2"></div>
-            <div class="logo-slot"><img src="mkkkkk.jpeg" alt="Logo 3"></div>
-            <div class="logo-slot"><img src="mkkkk.jpeg" alt="Logo 4"></div>
-            <div class="logo-slot"><img src="mkkk.jpeg" alt="Logo 5"></div>
+            <div class="logo-slot">
+                <img src="https://via.placeholder.com/100/06b6d4/ffffff?text=Logo+1" alt="Logo 1">
+            </div>
+            <div class="logo-slot">
+                <img src="https://via.placeholder.com/100/ec4899/ffffff?text=Logo+2" alt="Logo 2">
+            </div>
+            <div class="logo-slot">
+                <img src="https://via.placeholder.com/100/8b5cf6/ffffff?text=Logo+3" alt="Logo 3">
+            </div>
+            <div class="logo-slot">
+                <img src="https://via.placeholder.com/100/10b981/ffffff?text=Logo+4" alt="Logo 4">
+            </div>
+            <div class="logo-slot">
+                <img src="https://via.placeholder.com/100/f59e0b/ffffff?text=Logo+5" alt="Logo 5">
+            </div>
         </div>
 
         <select class="mode-dropdown" id="main-mode" onchange="switchModule()">
@@ -363,31 +381,14 @@
             ];
 
             const sciBtns = [
-                { t: angleMode, c: 'btn-act', f: 'toggleAngleMode()' },
-                { t: 'sin', c: 'btn-op', f: "appendMath('sin')" },
-                { t: 'cos', c: 'btn-op', f: "appendMath('cos')" },
-                { t: 'tan', c: 'btn-op', f: "appendMath('tan')" },
-
-                { t: 'ln', c: 'btn-op', f: "appendMath('log')" },
-                { t: 'log', c: 'btn-op', f: "appendMath('log10')" },
-                { t: 'e', c: 'btn-op', f: "append('Math.E')" },
-                { t: 'π', c: 'btn-op', f: "append('Math.PI')" },
-
-                { t: '(', c: 'btn-op', f: "append('(')" },
-                { t: ')', c: 'btn-op', f: "append(')')" },
-                { t: 'x²', c: 'btn-op', f: "append('**2')" },
-                { t: 'xⁿ', c: 'btn-op', f: "append('**')" },
-
-                { t: '√', c: 'btn-op', f: "appendMath('sqrt')" },
-                { t: 'n!', c: 'btn-op', f: "calcFactorialDirect()" },
-                { t: 'AC', c: 'btn-act', f: 'clearAll()' },
-                { t: 'DEL', c: 'btn-act', f: 'delChar()' },
-
-                { t: '7', f: "append('7')" }, { t: '8', f: "append('8')" }, { t: '9', f: "append('9')" }, { t: '÷', c: 'btn-op', f: "append('/')" },
-                { t: '4', f: "append('4')" }, { t: '5', f: "append('5')" }, { t: '6', f: "append('6')" }, { t: '×', c: 'btn-op', f: "append('*')" },
-                { t: '1', f: "append('1')" }, { t: '2', f: "append('2')" }, { t: '3', f: "append('3')" }, { t: '-', c: 'btn-op', f: "append('-')" },
-                { t: '0', f: "append('0')" }, { t: '.', f: "append('.')" }, { t: '%', c: 'btn-op', f: "append('%')" }, { t: '+', c: 'btn-op', f: "append('+')" },
-                { t: '±', f: "toggleSign()" }, { t: '=', c: 'btn-eq', f: 'calculate()' }
+                { t: angleMode, c: 'btn-act', f: 'toggleAngleMode()' }, { t: 'sin', c: 'btn-op', f: "appendMath('sin')" },
+                { t: 'cos', c: 'btn-op', f: "appendMath('cos')" }, { t: 'tan', c: 'btn-op', f: "appendMath('tan')" },
+                { t: 'ln', c: 'btn-op', f: "appendMath('log')" }, { t: 'log', c: 'btn-op', f: "appendMath('log10')" },
+                { t: '√', c: 'btn-op', f: "appendMath('sqrt')" }, { t: 'x²', c: 'btn-op', f: "append('**2')" },
+                { t: 'xⁿ', c: 'btn-op', f: "append('**')" }, { t: 'π', c: 'btn-op', f: "append('Math.PI')" },
+                { t: 'e', c: 'btn-op', f: "append('Math.E')" }, { t: '(', c: 'btn-op', f: "append('(')" },
+                { t: ')', c: 'btn-op', f: "append(')')" }, { t: 'n!', c: 'btn-op', f: "calcFactorialDirect()" },
+                ...basicBtns
             ];
 
             const list = (mode === 'scientific') ? sciBtns : basicBtns;
@@ -596,7 +597,6 @@
             if(isNaN(val)) return res.innerHTML = "BIN: -<br>OCT: -<br>HEX: -";
             res.innerHTML = `BIN: ${val.toString(2)}<br>OCT: ${val.toString(8)}<br>HEX: ${val.toString(16).toUpperCase()}`;
         }
-
         function processASCII() {
             let text = document.getElementById('prog-text').value;
             let codes = text.split('').map(c => c.charCodeAt(0)).join(' ');
@@ -607,197 +607,122 @@
             const type = document.getElementById('sci-type').value;
             const target = document.getElementById('sci-inputs');
             if(type === 'speed') {
-                target.innerHTML = `<div class="form-group"><label>Jarak / s (Meter):</label><input type="number" id="s-dist" value="100"></div>
-                                    <div class="form-group"><label>Waktu / t (Detik):</label><input type="number" id="s-time" value="10"></div>`;
+                target.innerHTML = `<div class="form-group"><label>Jarak / s (m):</label><input type="number" id="s-s" value="100"></div>
+                                    <div class="form-group"><label>Waktu / t (s):</label><input type="number" id="s-t" value="10"></div>`;
             } else if(type === 'force') {
-                target.innerHTML = `<div class="form-group"><label>Massa / m (kg):</label><input type="number" id="s-mass" value="10"></div>
-                                    <div class="form-group"><label>Percepatan / a (m/s²):</label><input type="number" id="s-acc" value="9.8"></div>`;
+                target.innerHTML = `<div class="form-group"><label>Massa / m (kg):</label><input type="number" id="s-m" value="50"></div>
+                                    <div class="form-group"><label>Percepatan / a (m/s²):</label><input type="number" id="s-a" value="9.8"></div>`;
             } else if(type === 'ohms_law') {
-                target.innerHTML = `<div class="form-group"><label>Arus Listrik / I (Ampere):</label><input type="number" id="s-curr" value="2"></div>
-                                    <div class="form-group"><label>Hambatan / R (Ohm):</label><input type="number" id="s-res" value="10"></div>`;
+                target.innerHTML = `<div class="form-group"><label>Arus Listrik / I (Ampere):</label><input type="number" id="s-i" value="2"></div>
+                                    <div class="form-group"><label>Hambatan / R (Ohm):</label><input type="number" id="s-r" value="10"></div>`;
             } else if(type === 'density') {
-                target.innerHTML = `<div class="form-group"><label>Massa / m (kg):</label><input type="number" id="s-d-m" value="50"></div>
-                                    <div class="form-group"><label>Volume / V (m³):</label><input type="number" id="s-d-v" value="2"></div>`;
+                target.innerHTML = `<div class="form-group"><label>Massa (kg):</label><input type="number" id="s-dm" value="200"></div>
+                                    <div class="form-group"><label>Volume (m³):</label><input type="number" id="s-dv" value="2"></div>`;
             }
         }
-
         function processScience() {
             const type = document.getElementById('sci-type').value;
             const res = document.getElementById('sci-result');
-            if(type === 'speed') {
-                let s = parseFloat(document.getElementById('s-dist').value);
-                let t = parseFloat(document.getElementById('s-time').value);
-                res.innerText = `Kecepatan (v) = ${(s / t).toFixed(2)} m/s`;
-            } else if(type === 'force') {
-                let m = parseFloat(document.getElementById('s-mass').value);
-                let a = parseFloat(document.getElementById('s-acc').value);
-                res.innerText = `Gaya (F) = ${(m * a).toFixed(2)} N`;
-            } else if(type === 'ohms_law') {
-                let i = parseFloat(document.getElementById('s-curr').value);
-                let r = parseFloat(document.getElementById('s-res').value);
-                res.innerText = `Tegangan Listrik (V) = ${(i * r).toFixed(2)} Volt`;
-            } else if(type === 'density') {
-                let m = parseFloat(document.getElementById('s-d-m').value);
-                let v = parseFloat(document.getElementById('s-d-v').value);
-                res.innerText = `Massa Jenis (ρ) = ${(m / v).toFixed(2)} kg/m³`;
-            }
+            if(type === 'speed') res.innerText = `Kecepatan (v) = ${(parseFloat(document.getElementById('s-s').value) / parseFloat(document.getElementById('s-t').value)).toFixed(2)} m/s`;
+            if(type === 'force') res.innerText = `Gaya (F) = ${(parseFloat(document.getElementById('s-m').value) * parseFloat(document.getElementById('s-a').value)).toFixed(2)} N`;
+            if(type === 'ohms_law') res.innerText = `Tegangan (V) = ${(parseFloat(document.getElementById('s-i').value) * parseFloat(document.getElementById('s-r').value)).toFixed(2)} Volt`;
+            if(type === 'density') res.innerText = `Massa Jenis (ρ) = ${(parseFloat(document.getElementById('s-dm').value) / parseFloat(document.getElementById('s-dv').value)).toFixed(2)} kg/m³`;
         }
 
         function renderGeoForm() {
             const type = document.getElementById('geo-type').value;
             const target = document.getElementById('geo-inputs');
-            if(type === 'rectangle') {
-                target.innerHTML = `<div class="form-group"><label>Panjang (p):</label><input type="number" id="g-p" value="10"></div>
-                                    <div class="form-group"><label>Lebar (l):</label><input type="number" id="g-l" value="5"></div>`;
-            } else if(type === 'circle') {
-                target.innerHTML = `<div class="form-group"><label>Jari-jari (r):</label><input type="number" id="g-r" value="7"></div>`;
-            } else if(type === 'cylinder') {
-                target.innerHTML = `<div class="form-group"><label>Jari-jari Alas (r):</label><input type="number" id="g-cr" value="7"></div>
-                                    <div class="form-group"><label>Tinggi Tabung (t):</label><input type="number" id="g-ct" value="10"></div>`;
-            } else if(type === 'sphere') {
-                target.innerHTML = `<div class="form-group"><label>Jari-jari Bola (r):</label><input type="number" id="g-sr" value="10"></div>`;
-            }
+            if(type === 'rectangle') target.innerHTML = `<div class="form-group"><label>Panjang:</label><input type="number" id="g-p" value="10"></div><div class="form-group"><label>Lebar:</label><input type="number" id="g-l" value="5"></div>`;
+            if(type === 'circle') target.innerHTML = `<div class="form-group"><label>Jari-jari (r):</label><input type="number" id="g-r" value="7"></div>`;
+            if(type === 'cylinder') target.innerHTML = `<div class="form-group"><label>Jari-jari (r):</label><input type="number" id="g-cr" value="7"></div><div class="form-group"><label>Tinggi (h):</label><input type="number" id="g-ch" value="10"></div>`;
+            if(type === 'sphere') target.innerHTML = `<div class="form-group"><label>Jari-jari (r):</label><input type="number" id="g-sr" value="7"></div>`;
         }
-
         function processGeometry() {
             const type = document.getElementById('geo-type').value;
             const res = document.getElementById('geo-result');
             if(type === 'rectangle') {
-                let p = parseFloat(document.getElementById('g-p').value);
-                let l = parseFloat(document.getElementById('g-l').value);
-                res.innerText = `Luas = ${p * l}\nKeliling = ${2 * (p + l)}`;
+                let p = parseFloat(document.getElementById('g-p').value), l = parseFloat(document.getElementById('g-l').value);
+                res.innerText = `Luas: ${p*l}\nKeliling: ${2*(p+l)}`;
             } else if(type === 'circle') {
                 let r = parseFloat(document.getElementById('g-r').value);
-                res.innerText = `Luas = ${(Math.PI * r * r).toFixed(2)}\nKeliling = ${(2 * Math.PI * r).toFixed(2)}`;
+                res.innerText = `Luas: ${(Math.PI*r*r).toFixed(2)}\nKeliling: ${(2*Math.PI*r).toFixed(2)}`;
             } else if(type === 'cylinder') {
-                let r = parseFloat(document.getElementById('g-cr').value);
-                let t = parseFloat(document.getElementById('g-ct').value);
-                let vol = Math.PI * r * r * t;
-                let area = 2 * Math.PI * r * (r + t);
-                res.innerText = `Volume Tabung = ${vol.toFixed(2)}\nLuas Permukaan = ${area.toFixed(2)}`;
+                let r = parseFloat(document.getElementById('g-cr').value), h = parseFloat(document.getElementById('g-ch').value);
+                res.innerText = `Volume: ${(Math.PI*r*r*h).toFixed(2)}\nLuas Permukaan: ${(2*Math.PI*r*(r+h)).toFixed(2)}`;
             } else if(type === 'sphere') {
                 let r = parseFloat(document.getElementById('g-sr').value);
-                let vol = (4/3) * Math.PI * Math.pow(r, 3);
-                let area = 4 * Math.PI * r * r;
-                res.innerText = `Volume Bola = ${vol.toFixed(2)}\nLuas Permukaan = ${area.toFixed(2)}`;
+                res.innerText = `Volume: ${(4/3 * Math.PI * Math.pow(r, 3)).toFixed(2)}`;
             }
         }
 
         function processDateTime() {
-            const d1 = new Date(document.getElementById('dt-start').value);
-            const d2 = new Date(document.getElementById('dt-end').value || new Date());
-            const res = document.getElementById('dt-result');
-            
-            if(isNaN(d1)) return res.innerText = "Pilih tanggal awal terlebih dahulu.";
-            
-            let diffTime = Math.abs(d2 - d1);
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            let d1 = new Date(document.getElementById('dt-start').value);
+            let d2 = new Date(document.getElementById('dt-end').value);
+            let res = document.getElementById('dt-result');
+            if(isNaN(d1) || isNaN(d2)) return res.innerText = "Masukkan kedua tanggal!";
+            let diffDays = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24));
             let years = Math.floor(diffDays / 365);
-            let remainingDays = diffDays % 365;
-
-            res.innerText = `Selisih Waktu: ${diffDays} Hari\n(Setara: ~${years} Tahun, ${remainingDays} Hari)`;
+            res.innerText = `Selisih Total: ${diffDays} Hari\nEstimasi Usia/Rentang: ${years} Tahun ${Math.floor((diffDays%365)/30)} Bulan`;
         }
 
         function renderLifeForm() {
             const type = document.getElementById('life-type').value;
             const target = document.getElementById('life-inputs');
-            if(type === 'tip') {
-                target.innerHTML = `<div class="form-group"><label>Total Tagihan (Rp):</label><input type="number" id="li-bill" value="150000"></div>
-                                    <div class="form-group"><label>Persen Tip (%):</label><input type="number" id="li-tip" value="10"></div>
-                                    <div class="form-group"><label>Jumlah Orang:</label><input type="number" id="li-ppl" value="3"></div>`;
-            } else if(type === 'fuel') {
-                target.innerHTML = `<div class="form-group"><label>Jarak Tempuh (KM):</label><input type="number" id="li-dist" value="120"></div>
-                                    <div class="form-group"><label>Konsumsi BBM (KM / Liter):</label><input type="number" id="li-eff" value="12"></div>
-                                    <div class="form-group"><label>Harga BBM per Liter (Rp):</label><input type="number" id="li-price" value="13000"></div>`;
-            } else if(type === 'paint') {
-                target.innerHTML = `<div class="form-group"><label>Luas Dinding Total (m²):</label><input type="number" id="li-wall" value="40"></div>
-                                    <div class="form-group"><label>Daya Sebar Cat (m² / Liter):</label><input type="number" id="li-p-cov" value="10"></div>`;
-            }
+            if(type === 'tip') target.innerHTML = `<div class="form-group"><label>Total Tagihan (Rp):</label><input type="number" id="l-bill" value="200000"></div><div class="form-group"><label>Tip (%):</label><input type="number" id="l-tip" value="10"></div><div class="form-group"><label>Jumlah Orang:</label><input type="number" id="l-people" value="4"></div>`;
+            if(type === 'fuel') target.innerHTML = `<div class="form-group"><label>Jarak Tempuh (km):</label><input type="number" id="l-dist" value="150"></div><div class="form-group"><label>Rasio BBM (km/liter):</label><input type="number" id="l-ratio" value="12"></div><div class="form-group"><label>Harga BBM per Liter (Rp):</label><input type="number" id="l-price" value="13000"></div>`;
+            if(type === 'paint') target.innerHTML = `<div class="form-group"><label>Luas Dinding Total (m²):</label><input type="number" id="l-wall" value="40"></div>`;
         }
-
         function processLifestyle() {
             const type = document.getElementById('life-type').value;
             const res = document.getElementById('life-result');
             if(type === 'tip') {
-                let bill = parseFloat(document.getElementById('li-bill').value);
-                let tip = parseFloat(document.getElementById('li-tip').value);
-                let ppl = parseInt(document.getElementById('li-ppl').value);
-                let totalTip = bill * (tip / 100);
-                let grandTotal = bill + totalTip;
-                res.innerText = `Total Tip: Rp ${totalTip.toLocaleString()}\nTotal Tagihan: Rp ${grandTotal.toLocaleString()}\nBayar per Orang: Rp ${(grandTotal / ppl).toLocaleString()}`;
+                let bill = parseFloat(document.getElementById('l-bill').value);
+                let tip = bill * (parseFloat(document.getElementById('l-tip').value)/100);
+                let total = bill + tip;
+                res.innerText = `Total + Tip: Rp ${total.toLocaleString()}\nPer Orang: Rp ${(total/parseFloat(document.getElementById('l-people').value)).toLocaleString()}`;
             } else if(type === 'fuel') {
-                let dist = parseFloat(document.getElementById('li-dist').value);
-                let eff = parseFloat(document.getElementById('li-eff').value);
-                let price = parseFloat(document.getElementById('li-price').value);
-                let needed = dist / eff;
-                let cost = needed * price;
-                res.innerText = `BBM Dibutuhkan: ${needed.toFixed(1)} Liter\nEst. Biaya BBM: Rp ${Math.round(cost).toLocaleString()}`;
+                let liters = parseFloat(document.getElementById('l-dist').value) / parseFloat(document.getElementById('l-ratio').value);
+                let cost = liters * parseFloat(document.getElementById('l-price').value);
+                res.innerText = `Kebutuhan BBM: ${liters.toFixed(1)} Liter\nTotal Biaya: Rp ${Math.round(cost).toLocaleString()}`;
             } else if(type === 'paint') {
-                let wall = parseFloat(document.getElementById('li-wall').value);
-                let cov = parseFloat(document.getElementById('li-p-cov').value);
-                let liters = wall / cov;
-                res.innerText = `Kebutuhan Cat (1 Lapis): ~${liters.toFixed(1)} Liter\nKebutuhan Cat (2 Lapis Standar): ~${(liters * 2).toFixed(1)} Liter`;
+                let liters = parseFloat(document.getElementById('l-wall').value) / 10;
+                res.innerText = `Estimasi Kebutuhan Cat: ${Math.ceil(liters)} Liter (1 Lapis)`;
             }
         }
 
         function processStats() {
-            const input = document.getElementById('stats-data').value;
-            const res = document.getElementById('stats-result');
-            let nums = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
-
-            if(nums.length === 0) return res.innerText = "Masukkan set angka yang valid.";
-
-            nums.sort((a, b) => a - b);
-            let sum = nums.reduce((a, b) => a + b, 0);
-            let mean = sum / nums.length;
+            let raw = document.getElementById('stats-data').value;
+            let arr = raw.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+            let res = document.getElementById('stats-result');
+            if(arr.length === 0) return res.innerText = "Masukkan data angka valid!";
             
-            let median;
-            let mid = Math.floor(nums.length / 2);
-            if(nums.length % 2 === 0) median = (nums[mid - 1] + nums[mid]) / 2;
-            else median = nums[mid];
-
-            res.innerText = `Jumlah Data (N): ${nums.length}\nMean (Rata-rata): ${mean.toFixed(2)}\nMedian (Nilai Tengah): ${median}\nNilai Min: ${nums[0]}\nNilai Max: ${nums[nums.length - 1]}`;
+            arr.sort((a,b) => a-b);
+            let sum = arr.reduce((a,b) => a+b, 0);
+            let mean = sum / arr.length;
+            let median = arr.length % 2 === 0 ? (arr[arr.length/2 - 1] + arr[arr.length/2]) / 2 : arr[Math.floor(arr.length/2)];
+            let variance = arr.reduce((a,b) => a + Math.pow(b - mean, 2), 0) / arr.length;
+            
+            res.innerText = `Jumlah Data (n): ${arr.length}\nMean: ${mean.toFixed(2)}\nMedian: ${median}\nMin / Max: ${arr[0]} / ${arr[arr.length-1]}\nStandar Deviasi: ${Math.sqrt(variance).toFixed(2)}`;
         }
 
         function processAISolver() {
-            const prompt = document.getElementById('ai-prompt').value;
-            const res = document.getElementById('ai-result');
-            if(!prompt) return res.innerText = "Silakan tuliskan pertanyaan matematika Anda.";
-
-            res.innerText = "🤖 Astro AI sedang memproses matematika...";
-
+            let q = document.getElementById('ai-prompt').value.toLowerCase();
+            let res = document.getElementById('ai-result');
+            res.innerText = "🤖 Astro AI sedang menganalisis soal...\n";
+            
             setTimeout(() => {
-                try {
-                    let sanitized = prompt.toLowerCase();
-                    if (sanitized.includes("luas lingkaran")) {
-                        let matches = sanitized.match(/\d+/g);
-                        if (matches) {
-                            let val = parseFloat(matches[0]);
-                            let r = sanitized.includes("diameter") ? val / 2 : val;
-                            let area = Math.PI * r * r;
-                            res.innerText = `🤖 [AI Solusi]:\nRumus: L = π × r²\nJari-jari (r) = ${r} cm\nHasil Luas = ${area.toFixed(2)} cm²`;
-                            return;
-                        }
-                    }
-                    
-                    let exprMatch = prompt.match(/[0-9\.\+\-\*\/\(\)\^\s]+/g);
-                    if (exprMatch) {
-                        let cleanExpr = exprMatch.join('').trim();
-                        if (cleanExpr.length > 0) {
-                            let evalRes = eval(cleanExpr);
-                            res.innerText = `🤖 [AI Engine Analisis]:\nEkspresi Terdeteksi: ${cleanExpr}\nHasil Kalkulasi: ${evalRes}`;
-                            return;
-                        }
-                    }
-
-                    res.innerText = `🤖 [Astro AI]: Jawaban untuk "${prompt}" membutuhkan modul khusus/koneksi API server. Silakan gunakan kalkulator manual pada tab yang sesuai.`;
-                } catch(e) {
-                    res.innerText = "🤖 Astro AI: Maaf, format ekspresi matematika tidak dikenali.";
+                if(q.includes('lingkaran') && (q.includes('diameter') || q.includes('jari'))) {
+                    let num = q.match(/\d+/);
+                    let val = num ? parseFloat(num[0]) : 20;
+                    let r = q.includes('diameter') ? val / 2 : val;
+                    let area = Math.PI * r * r;
+                    res.innerText = `💡 **Langkah Penyelesaian AI:**\n1. Diketahui: r = ${r} cm\n2. Rumus Luas Lingkaran: L = π × r²\n3. L = 3.14159 × ${r}²\n\n✅ **Hasil Akhir:** ${area.toFixed(2)} cm²`;
+                } else {
+                    res.innerText = `💡 **Jawaban AI Engine:**\nMaaf, solver saat ini dikonfigurasi untuk memproses soal bahasa natural Geometri/Aritmatika sederhana. Cobalah kata kunci seperti: "Hitung luas lingkaran dengan diameter 20 cm".`;
                 }
-            }, 800);
+            }, 500);
         }
 
-        // Inisialisasi awal
         switchModule();
     </script>
 </body>
